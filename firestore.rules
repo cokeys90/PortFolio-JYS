@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // App Check 검증 통과 (Firestore 콘솔에서 enforcement 활성화 필요)
+    function appCheckPassed() {
+      return request.app != null;
+    }
+
+    // visits: 클라이언트가 직접 create. 무료 한도 보호를 위한 다층 방어:
+    // 1. App Check 강제 (봇 차단)
+    // 2. 필드 화이트리스트 + 길이 제한 (악성 페이로드 차단)
+    // 3. serverTimestamp 강제 (시간 위조 차단)
+    // 4. update/delete 금지
+    match /visits/{id} {
+      allow read: if isAdmin();
+      allow create: if appCheckPassed()
+        && request.resource.data.keys().hasOnly([
+            'page', 'referrer', 'userAgent', 'device',
+            'language', 'timezone', 'screen', 'country', 'timestamp'
+          ])
+        && request.resource.data.keys().hasAll(['page', 'device', 'timestamp'])
+        && request.resource.data.timestamp == request.time
+        && request.resource.data.page is string
+        && request.resource.data.page.size() < 200
+        && request.resource.data.userAgent is string
+        && request.resource.data.userAgent.size() < 500
+        && request.resource.data.device in ['mobile', 'tablet', 'desktop'];
+      allow update, delete: if false;
+    }
+
+    // posts: 게시된 글은 누구나 read, 쓰기는 admin만 (App Check 강제)
+    match /posts/{slug} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin() && appCheckPassed();
+    }
+
+    // contacts: 클라이언트가 create (Web3Forms와 동시 발행). admin만 read/update.
+    match /contacts/{id} {
+      allow create: if appCheckPassed()
+        && request.resource.data.keys().hasOnly(['name', 'email', 'message', 'status', 'createdAt'])
+        && request.resource.data.keys().hasAll(['name', 'email', 'message', 'status', 'createdAt'])
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() < 100
+        && request.resource.data.email.size() < 200
+        && request.resource.data.message.size() > 0 && request.resource.data.message.size() < 5000
+        && request.resource.data.status == 'new';
+      allow read, update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // admins: 본인만 read, 직접 write 금지 (콘솔에서 수동 등록)
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}

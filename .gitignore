@@ -158,3 +158,8 @@ docs/reference/
 # OS files
 Thumbs.db
 .DS_Store
+
+# Firebase debug logs
+firebase-debug.log
+firebase-debug.*.log
+*.local
