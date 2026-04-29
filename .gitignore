@@ -141,3 +141,20 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Personal reference materials (resumes, ID photos, contact info — never commit)
+docs/reference/
+
+# IDE — JetBrains (workspace.xml contains personal editor state)
+.idea/
+*.iml
+
+# IDE — VSCode local
+.vscode/
+
+# Claude Code — local user overrides (skills/ stays tracked for team sharing)
+.claude/settings.local.json
+
+# OS files
+Thumbs.db
+.DS_Store
