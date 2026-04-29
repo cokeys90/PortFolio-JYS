@@ -58,18 +58,18 @@
 
 ### type 목록
 
-| type | 용도 |
-|---|---|
-| `feat` | 새 기능 추가 |
-| `fix` | 버그 수정 |
-| `docs` | 문서만 변경 (README, plan, CLAUDE.md 등) |
-| `style` | 포맷팅, 세미콜론 등 동작에 영향 없는 변경 |
-| `refactor` | 동작 변경 없는 리팩터링 |
-| `perf` | 성능 개선 |
-| `test` | 테스트 추가/수정 |
-| `build` | 빌드 시스템, 의존성 변경 (Vite, Tailwind config 등) |
-| `ci` | GitHub Actions 등 CI 설정 |
-| `chore` | 그 외 (gitignore, 설정 파일 등) |
+| type       | 용도                                                |
+| ---------- | --------------------------------------------------- |
+| `feat`     | 새 기능 추가                                        |
+| `fix`      | 버그 수정                                           |
+| `docs`     | 문서만 변경 (README, plan, CLAUDE.md 등)            |
+| `style`    | 포맷팅, 세미콜론 등 동작에 영향 없는 변경           |
+| `refactor` | 동작 변경 없는 리팩터링                             |
+| `perf`     | 성능 개선                                           |
+| `test`     | 테스트 추가/수정                                    |
+| `build`    | 빌드 시스템, 의존성 변경 (Vite, Tailwind config 등) |
+| `ci`       | GitHub Actions 등 CI 설정                           |
+| `chore`    | 그 외 (gitignore, 설정 파일 등)                     |
 
 ### scope 예시
 
