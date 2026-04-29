@@ -26,16 +26,19 @@
 ## 1. 프로젝트 개요
 
 ### 목적
+
 - 이직 지원용 (이력서 URL 첨부)
 - 개인 브랜딩 + 블로그
 - Firebase 풀스택 학습/포트폴리오 강화
 
 ### 핵심 기능
+
 - 공개 포트폴리오 사이트 (Hero / About / Skills / Experience / Projects / Patents / Contact)
 - 블로그 (마크다운 기반)
 - 관리자 페이지 (방문자 지역/시간 분석, 블로그 CRUD, 문의 내역)
 
 ### 스코프 외
+
 - 댓글 시스템
 - 다국어 (영어 우선순위는 낮음, 추후 옵션)
 - 검색 기능 (블로그 글 적을 땐 불필요)
@@ -44,31 +47,33 @@
 
 ## 2. 기술 스택
 
-| 영역 | 선택 | 비고 |
-|---|---|---|
-| **프론트엔드** | React 19 + Vite + TypeScript | 빌드 빠름, Firebase Hosting과 궁합 좋음 |
-| **스타일링** | Tailwind CSS | 다크모드/반응형 처리 간단 |
-| **라우팅** | React Router v6+ | SPA 라우팅 |
-| **애니메이션** | Framer Motion | 진입/스크롤/호버 인터랙션 |
-| **차트** | Recharts | 관리자 시계열 |
-| **지도** | react-simple-maps + d3-geo | 관리자 방문자 지도 |
-| **마크다운** | react-markdown + remark-gfm + rehype-highlight | 블로그 렌더링 |
-| **폼** | react-hook-form + zod | 문의 폼 |
-| **서버 상태** | @tanstack/react-query | Firestore 캐시/동기화 (선택) |
-| **호스팅** | Firebase Hosting | CDN, HTTPS, 커스텀 도메인 |
-| **인증** | Firebase Auth (Google) | 관리자 로그인 |
-| **DB** | Firestore | NoSQL, 실시간 동기화 |
-| **함수** | Cloud Functions (Node 20) | logVisit, 문의 이메일 발송 |
-| **이메일** | Resend | 무료 한도 넉넉 (월 3,000건) |
+| 영역           | 선택                                           | 비고                                    |
+| -------------- | ---------------------------------------------- | --------------------------------------- |
+| **프론트엔드** | React 19 + Vite + TypeScript                   | 빌드 빠름, Firebase Hosting과 궁합 좋음 |
+| **스타일링**   | Tailwind CSS                                   | 다크모드/반응형 처리 간단               |
+| **라우팅**     | React Router v6+                               | SPA 라우팅                              |
+| **애니메이션** | Framer Motion                                  | 진입/스크롤/호버 인터랙션               |
+| **차트**       | Recharts                                       | 관리자 시계열                           |
+| **지도**       | react-simple-maps + d3-geo                     | 관리자 방문자 지도                      |
+| **마크다운**   | react-markdown + remark-gfm + rehype-highlight | 블로그 렌더링                           |
+| **폼**         | react-hook-form + zod                          | 문의 폼                                 |
+| **서버 상태**  | @tanstack/react-query                          | Firestore 캐시/동기화 (선택)            |
+| **호스팅**     | Firebase Hosting                               | CDN, HTTPS, 커스텀 도메인               |
+| **인증**       | Firebase Auth (Google)                         | 관리자 로그인                           |
+| **DB**         | Firestore                                      | NoSQL, 실시간 동기화                    |
+| **함수**       | Cloud Functions (Node 20)                      | logVisit, 문의 이메일 발송              |
+| **이메일**     | Resend                                         | 무료 한도 넉넉 (월 3,000건)             |
 
 ---
 
 ## 3. 디자인 시스템
 
 ### 컨셉
+
 **다크 터미널 + 픽셀 액센트.** 다크모드 기본, 라이트모드 토글 지원.
 
 원칙: **컨셉은 분위기 레이어, 콘텐츠는 즉시 읽혀야 함.**
+
 - 헤더/액센트만 픽셀 폰트
 - 본문/메타 정보는 깔끔한 모노 + 한글 산세리프
 - 그린 액센트는 임팩트 수치, 액션 CTA에만 제한적으로
@@ -76,40 +81,42 @@
 ### 컬러 토큰
 
 #### 다크 모드 (기본)
-| 용도 | 값 |
-|---|---|
-| `--bg` | `#0a0a0a` |
-| `--surface` | `#161616` |
-| `--border` | `#2a2a2a` |
-| `--text-primary` | `#e6e6e6` |
-| `--text-secondary` | `#888888` |
-| `--text-muted` | `#666666` |
-| `--accent` | `#4ade80` (라임 그린) |
-| `--accent-hover-bg` | `#0e1a10` |
+
+| 용도                | 값                    |
+| ------------------- | --------------------- |
+| `--bg`              | `#0a0a0a`             |
+| `--surface`         | `#161616`             |
+| `--border`          | `#2a2a2a`             |
+| `--text-primary`    | `#e6e6e6`             |
+| `--text-secondary`  | `#888888`             |
+| `--text-muted`      | `#666666`             |
+| `--accent`          | `#4ade80` (라임 그린) |
+| `--accent-hover-bg` | `#0e1a10`             |
 
 #### 라이트 모드
-| 용도 | 값 |
-|---|---|
-| `--bg` | `#fafaf7` (살짝 미색) |
-| `--surface` | `#ffffff` |
-| `--border` | `#e5e5e0` |
-| `--text-primary` | `#1a1a1a` |
-| `--text-secondary` | `#555555` |
-| `--text-muted` | `#666666` |
-| `--accent` | `#15803d` (포레스트 그린, 대비 5.4:1) |
-| `--accent-hover-bg` | `#f0f7f1` |
+
+| 용도                | 값                                    |
+| ------------------- | ------------------------------------- |
+| `--bg`              | `#fafaf7` (살짝 미색)                 |
+| `--surface`         | `#ffffff`                             |
+| `--border`          | `#e5e5e0`                             |
+| `--text-primary`    | `#1a1a1a`                             |
+| `--text-secondary`  | `#555555`                             |
+| `--text-muted`      | `#666666`                             |
+| `--accent`          | `#15803d` (포레스트 그린, 대비 5.4:1) |
+| `--accent-hover-bg` | `#f0f7f1`                             |
 
 > 액센트 그린은 모드별로 다름. 다크는 빛으로 떠보이는 라임, 라이트는 차분한 포레스트.
 > 같은 색 그대로 쓰면 라이트모드 대비 1.7:1로 가독성 깨짐 (WCAG AA 미달).
 
 ### 타이포그래피
 
-| 용도 | 폰트 | 사이즈 |
-|---|---|---|
-| 픽셀 액센트 (이름, Hero) | Press Start 2P | 24px (clamp 18-24) |
-| 터미널/모노 영문 | VT323 또는 JetBrains Mono | 18-22px |
-| 한글 본문 | Pretendard | 16px (line-height 1.7) |
-| 코드 블록 | JetBrains Mono | 14-16px |
+| 용도                     | 폰트                      | 사이즈                 |
+| ------------------------ | ------------------------- | ---------------------- |
+| 픽셀 액센트 (이름, Hero) | Press Start 2P            | 24px (clamp 18-24)     |
+| 터미널/모노 영문         | VT323 또는 JetBrains Mono | 18-22px                |
+| 한글 본문                | Pretendard                | 16px (line-height 1.7) |
+| 코드 블록                | JetBrains Mono            | 14-16px                |
 
 > Press Start 2P는 헤더에만. 본문 한글은 항상 Pretendard. 안 그러면 가독성 망가짐.
 
@@ -259,6 +266,7 @@ service cloud.firestore {
 ## 6. 페이지 / 라우팅 구조
 
 ### 공개 라우트
+
 - `/` — Hero + About 요약 + Featured Projects 스니펫
 - `/projects` — 전체 프로젝트 리스트
 - `/projects/:slug` — 프로젝트 상세 (스크린샷, 아키텍처, 역할, 트러블슈팅)
@@ -268,6 +276,7 @@ service cloud.firestore {
 - `*` — 404 (`bash: /random-page: No such file or directory` 컨셉)
 
 ### 관리자 라우트 (AdminRoute 가드)
+
 - `/admin` — 대시보드 (방문 통계 요약)
 - `/admin/visits` — 방문자 상세 (지도, 시계열, 페이지별)
 - `/admin/posts` — 블로그 글 목록
@@ -277,6 +286,7 @@ service cloud.firestore {
 - `/admin/login` — Google 로그인
 
 ### Featured 프로젝트 (대표 6)
+
 1. PASS 모바일 운전면허증 (1,100만+ 가입자)
 2. 아차키 디지털 차키 (BLE/JNI/C++)
 3. 포켓맵고 (DAU 26만, 109만 다운로드)
@@ -296,9 +306,11 @@ service cloud.firestore {
 - 첫 방문 시 짧은 고지 배너 노출, localStorage 또는 쿠키로 1회만
 
 ### 고지 배너 문구 (예시)
+
 > 이 사이트는 방문자 통계(국가/지역, 페이지, 시간)를 익명으로 수집합니다. 개인을 식별하는 정보는 저장하지 않습니다. [확인]
 
 ### geolocation API 옵션
+
 - **ip-api.com** (무료, 서버사이드 45 req/min) — 시작 단계 충분
 - **Cloudflare Workers `cf.country`** — Hosting을 Cloudflare 거치면 무료, 더 빠름 (장기 옵션)
 - **ipinfo.io** — 무료 50,000 req/month, 정확도 좋음
@@ -308,12 +320,15 @@ service cloud.firestore {
 ## 8. 단계별 일정
 
 ### Week 1 — 공개 사이트 기반
+
 프로젝트 셋업, 정적 페이지, 첫 배포까지.
 
 ### Week 2 — 데이터 + 관리자
+
 Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 
 ### Week 3 — 블로그 + 마무리
+
 블로그 CRUD, 문의 폼 + 이메일, 디테일 다듬기, 도메인 연결.
 
 ---
@@ -323,6 +338,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 ### Phase 1 — 셋업 + 공개 사이트 기반 (Week 1)
 
 #### Day 1: 환경 셋업
+
 - [ ] Firebase 콘솔에서 프로젝트 생성 (`coke-ys-portfolio`)
 - [ ] Hosting, Auth, Firestore, Functions, Storage 활성화
 - [ ] Auth 제공자에 Google 추가, 본인 이메일 추가
@@ -337,6 +353,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] GitHub Actions로 `main` push 시 Firebase Hosting 자동 배포 설정
 
 #### Day 2: 디자인 토큰 + 레이아웃
+
 - [ ] 색상 CSS 변수 정의 (다크/라이트)
 - [ ] Tailwind config에 컬러 토큰 매핑
 - [ ] 폰트 로드 (`@fontsource/press-start-2p`, `@fontsource/vt323`, Pretendard)
@@ -345,12 +362,14 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] 다크모드 기본값으로 설정
 
 #### Day 3: 라우팅 + Hero
+
 - [ ] React Router 설정 (`/`, `/projects`, `/projects/:slug`, `/blog`, `/blog/:slug`, `/contact`, `/admin/*`)
 - [ ] Hero 섹션 구현 (부록 코드 참고)
 - [ ] 타이핑 애니메이션 (`react-type-animation` 또는 자체 구현)
 - [ ] 블록 커서 깜빡임 CSS
 
 #### Day 4-5: 콘텐츠 페이지
+
 - [ ] About 섹션 (간략 소개 + 강점)
 - [ ] Skills 섹션 (`npm list --depth=0` 형태로 카테고리별 트리)
 - [ ] Experience 섹션 (한스파마 → 튠잇 → 아라빛 타임라인)
@@ -364,20 +383,22 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 ### Phase 2 — 데이터 + 관리자 (Week 2)
 
 #### Day 6-7: Firestore + Cloud Functions
+
 - [ ] Firestore 스키마 TypeScript 타입 정의 (`src/types/firestore.ts`)
 - [ ] 보안 규칙 작성 (`firestore.rules`)
 - [ ] Firestore emulator로 보안 규칙 테스트
 - [ ] `logVisit` Cloud Function 구현
-    - [ ] IP 추출 (`req.headers['x-forwarded-for']`)
-    - [ ] IP 해시 (SHA-256 + salt, salt는 환경변수)
-    - [ ] ip-api.com 호출하여 지역 정보 추출
-    - [ ] User-Agent 파싱 → device 분류
-    - [ ] Firestore `visits`에 기록
-    - [ ] Rate limit (같은 ipHash + page 1분 내 중복 차단)
+  - [ ] IP 추출 (`req.headers['x-forwarded-for']`)
+  - [ ] IP 해시 (SHA-256 + salt, salt는 환경변수)
+  - [ ] ip-api.com 호출하여 지역 정보 추출
+  - [ ] User-Agent 파싱 → device 분류
+  - [ ] Firestore `visits`에 기록
+  - [ ] Rate limit (같은 ipHash + page 1분 내 중복 차단)
 - [ ] 클라이언트에서 페이지 이동 시 logVisit 호출 (React Router useLocation 활용)
 - [ ] 개인정보 고지 배너 컴포넌트 (1회 노출)
 
 #### Day 8-9: Firebase Auth + Admin Guard
+
 - [ ] Google 로그인 구현 (`signInWithPopup`)
 - [ ] `AdminRoute` 컴포넌트 (Auth + admins 컬렉션 체크)
 - [ ] Firestore 콘솔에서 본인 UID로 `admins/{uid}` 문서 수동 등록
@@ -385,6 +406,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] 로그아웃 버튼
 
 #### Day 10: Admin 대시보드
+
 - [ ] 대시보드 레이아웃 (사이드바 + 메인)
 - [ ] 메트릭 카드 (오늘/이번주/이번달 방문자 수)
 - [ ] 시계열 차트 (Recharts, 일별 방문자 추이 30일)
@@ -397,6 +419,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 ### Phase 3 — 블로그 + 마무리 (Week 3)
 
 #### Day 11-12: 블로그
+
 - [ ] 블로그 목록 페이지 (`/blog`)
 - [ ] 블로그 상세 페이지 (`/blog/:slug`) — react-markdown 렌더링
 - [ ] 코드 하이라이팅 (rehype-highlight)
@@ -409,16 +432,18 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] 첫 글 작성 — "포트폴리오 만들기 회고" 또는 "Firebase 풀스택 적용기"
 
 #### Day 13: 문의 폼
+
 - [ ] `/contact` 페이지
 - [ ] react-hook-form + zod 검증
 - [ ] `submitContact` Cloud Function
-    - [ ] Firestore `contacts`에 저장
-    - [ ] Resend로 본인 이메일에 알림 발송
+  - [ ] Firestore `contacts`에 저장
+  - [ ] Resend로 본인 이메일에 알림 발송
 - [ ] 스팸 방지 (honeypot 또는 hCaptcha)
 - [ ] Admin 문의 내역 페이지 (`/admin/contacts`)
 - [ ] 상태 변경 (new → read → replied)
 
 #### Day 14: 디테일 다듬기
+
 - [ ] Framer Motion 애니메이션 (Hero 진입, 카드 fade-in)
 - [ ] `prefers-reduced-motion` 대응
 - [ ] 다크/라이트 토글 애니메이션 (`$ theme --light` 명령어 효과)
@@ -428,6 +453,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] favicon (픽셀 아트 컨셉)
 
 #### Day 15: 마무리 + 배포
+
 - [ ] Lighthouse 점검 (목표: Performance 90+, A11y 95+, SEO 100)
 - [ ] 이미지 WebP 변환, lazy loading
 - [ ] 이력서 PDF Storage 업로드 + 다운로드 버튼 연결
@@ -440,21 +466,29 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 
 ## 10. 결정 사항
 
-- ✅ **스택**: React + Vite + TypeScript + Tailwind + Firebase (Hosting + Auth + Firestore + Functions)
+- ✅ **스택**: React 19 + Vite + TypeScript + Tailwind v4 + Firebase (Hosting + Auth + Firestore + Analytics)
+- ✅ **Firebase 플랜**: **Spark(무료)만 사용. Blaze 업그레이드 금지.**
+  - Cloud Functions / Cloud Storage 사용 안 함
+  - 방문 로그는 클라이언트 → Firestore 직접 write (IP 수집 X)
+  - 문의 폼은 Web3Forms (이메일) + Firestore 동시 write
+  - 이력서/블로그 이미지는 `public/` 정적 호스팅
+- ✅ **봇/한도 방어**: Firebase App Check (reCAPTCHA v3) + Firestore 규칙 4계층 방어
+  - 상세: [`docs/safeguards.md`](./safeguards.md)
 - ✅ **디자인 컨셉**: 다크 터미널 + 픽셀 액센트, 다크/라이트 토글 (다크 기본)
 - ✅ **레이아웃**: 프로젝트 카드는 1열 스택 (그리드 X)
-- ✅ **호스팅 전략**: Firebase 단독 (GitHub Pages 미사용)
+- ✅ **호스팅 전략**: Firebase Hosting 단독 (GitHub Pages 미사용)
 - ✅ **기존 `cokeys90.github.io`**: archive 또는 비공개 처리, 신규 프로젝트로 전환
-- ✅ **이메일 발송**: Resend
-- ✅ **개인정보**: IP는 SHA-256 해시, 지역만 저장
+- ✅ **개인정보**: IP 자체를 수집하지 않음. 지역 정보는 Firebase Analytics(자동) + 타임존(클라이언트)
 - ✅ **카드 디자인**: 일단 현재 패턴으로 시작, 진행하면서 수정
+
+> ⚠️ 위 결정으로 §2 기술스택, §4 아키텍처, §5 데이터 모델, §7 개인정보 처리, §8 단계별 일정, §12 부록의 일부가 구버전임. 코드/규칙 기준은 [`firestore.rules`](../firestore.rules), [`firebase.json`](../firebase.json), [`safeguards.md`](./safeguards.md)가 우선. plan 본문은 추후 일괄 갱신 예정.
 
 ## 11. 미정 사항
 
 - ⏳ **도메인 결정**
-    - 옵션 1: 새 커스텀 도메인 구매 (`cokeys.dev`, `jys-dev.com` 등)
-    - 옵션 2: Firebase 기본 도메인 사용 (`coke-ys-portfolio.web.app`)
-    - 권장: 커스텀 도메인 (포트폴리오 가치 ↑, 연 1~2만원)
+  - 옵션 1: 새 커스텀 도메인 구매 (`cokeys.dev`, `jys-dev.com` 등)
+  - 옵션 2: Firebase 기본 도메인 사용 (`coke-ys-portfolio.web.app`)
+  - 권장: 커스텀 도메인 (포트폴리오 가치 ↑, 연 1~2만원)
 - ⏳ **블로그 글 톤** — 기술 회고 위주 / 프로젝트 후기 위주 / 둘 다
 - ⏳ **이력서 PDF 다운로드 버전 디자인** — 현재 docx 그대로 / 새로 디자인
 - ⏳ **블로그 첫 글** — 무엇으로 시작할지
@@ -479,7 +513,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
   --accent-hover-bg: #f0f7f1;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --bg: #0a0a0a;
   --surface: #161616;
   --border: #2a2a2a;
@@ -493,7 +527,11 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 body {
   background: var(--bg);
   color: var(--text-primary);
-  font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+  font-family:
+    'Pretendard',
+    -apple-system,
+    system-ui,
+    sans-serif;
 }
 ```
 
@@ -502,7 +540,7 @@ body {
 `tailwind.config.ts`
 
 ```ts
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -527,7 +565,7 @@ export default {
       },
     },
   },
-} satisfies Config;
+} satisfies Config
 ```
 
 ### 12.3 Hero 컴포넌트 초안
@@ -541,7 +579,7 @@ export default function Hero() {
     { label: '포켓맵고', value: 'DAU 26만 · Play Store 1위' },
     { label: 'seat.AI', value: 'Kickstarter 459% 펀딩' },
     { label: '코러스N', value: '음원 NFT 특허 출원' },
-  ];
+  ]
 
   return (
     <section className="px-6 py-16 md:px-8 md:py-24">
@@ -554,8 +592,7 @@ export default function Hero() {
 
       <div className="font-terminal text-xl leading-relaxed">
         <div>
-          <span className="text-accent">$</span>{' '}
-          <span className="text-text-primary">whoami</span>
+          <span className="text-accent">$</span> <span className="text-text-primary">whoami</span>
         </div>
         <div className="text-text-secondary pl-4">
           &gt; Android · iOS · React Native · Web · Web3
@@ -590,7 +627,7 @@ export default function Hero() {
         </button>
       </div>
     </section>
-  );
+  )
 }
 ```
 
@@ -615,67 +652,64 @@ keyframes: {
 `functions/src/logVisit.ts`
 
 ```ts
-import { onRequest } from 'firebase-functions/v2/https';
-import { getFirestore } from 'firebase-admin/firestore';
-import { initializeApp } from 'firebase-admin/app';
-import { createHash } from 'crypto';
+import { onRequest } from 'firebase-functions/v2/https'
+import { getFirestore } from 'firebase-admin/firestore'
+import { initializeApp } from 'firebase-admin/app'
+import { createHash } from 'crypto'
 
-initializeApp();
-const db = getFirestore();
+initializeApp()
+const db = getFirestore()
 
-const SALT = process.env.IP_HASH_SALT ?? 'change-me';
+const SALT = process.env.IP_HASH_SALT ?? 'change-me'
 
-export const logVisit = onRequest(
-  { cors: true, region: 'asia-northeast3' },
-  async (req, res) => {
-    if (req.method !== 'POST') {
-      res.status(405).send('Method not allowed');
-      return;
-    }
-
-    const { page, referrer } = req.body as { page: string; referrer: string };
-    const ip =
-      (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ??
-      req.ip ??
-      'unknown';
-    const userAgent = req.headers['user-agent'] ?? '';
-
-    const ipHash = createHash('sha256').update(ip + SALT).digest('hex');
-
-    let geo = { country: 'unknown', region: 'unknown', city: 'unknown' };
-    try {
-      const r = await fetch(`http://ip-api.com/json/${ip}?fields=country,regionName,city`);
-      if (r.ok) {
-        const data = await r.json();
-        geo = {
-          country: data.country ?? 'unknown',
-          region: data.regionName ?? 'unknown',
-          city: data.city ?? 'unknown',
-        };
-      }
-    } catch (e) {
-      console.error('geo lookup failed', e);
-    }
-
-    const device = /Mobile/i.test(userAgent)
-      ? 'mobile'
-      : /Tablet|iPad/i.test(userAgent)
-      ? 'tablet'
-      : 'desktop';
-
-    await db.collection('visits').add({
-      ...geo,
-      ipHash,
-      page,
-      userAgent,
-      device,
-      referrer: referrer ?? '',
-      timestamp: new Date(),
-    });
-
-    res.json({ ok: true });
+export const logVisit = onRequest({ cors: true, region: 'asia-northeast3' }, async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method not allowed')
+    return
   }
-);
+
+  const { page, referrer } = req.body as { page: string; referrer: string }
+  const ip =
+    (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ?? req.ip ?? 'unknown'
+  const userAgent = req.headers['user-agent'] ?? ''
+
+  const ipHash = createHash('sha256')
+    .update(ip + SALT)
+    .digest('hex')
+
+  let geo = { country: 'unknown', region: 'unknown', city: 'unknown' }
+  try {
+    const r = await fetch(`http://ip-api.com/json/${ip}?fields=country,regionName,city`)
+    if (r.ok) {
+      const data = await r.json()
+      geo = {
+        country: data.country ?? 'unknown',
+        region: data.regionName ?? 'unknown',
+        city: data.city ?? 'unknown',
+      }
+    }
+  } catch (e) {
+    console.error('geo lookup failed', e)
+  }
+
+  const device = /Mobile/i.test(userAgent)
+    ? 'mobile'
+    : /Tablet|iPad/i.test(userAgent)
+      ? 'tablet'
+      : 'desktop'
+
+  await db.collection('visits').add({
+    ...geo,
+    ipHash,
+    page,
+    userAgent,
+    device,
+    referrer: referrer ?? '',
+    timestamp: new Date(),
+  })
+
+  res.json({ ok: true })
+})
 ```
 
 ### 12.6 디렉터리 구조 (제안)
