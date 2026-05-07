@@ -5,27 +5,41 @@
   --bg: #fafaf7;
   --surface: #ffffff;
   --border: #e5e5e0;
-  --text-primary: #1a1a1a;
-  --text-secondary: #555555;
-  --text-muted: #666666;
-  --accent: #15803d;
-  --accent-hover-bg: #f0f7f1;
+  --text-primary: #0a192f;
+  --text-secondary: #4a5568;
+  --text-muted: #6b7280;
+  --accent: #0d9488;
+  --accent-hover-bg: rgba(13, 148, 136, 0.08);
+
+  /* Tech 카테고리 색상 (라이트) — 다크 네이비 배경에서도 차분하게 보이는 톤 */
+  --tag-language: #0369a1; /* sky-700 */
+  --tag-framework: #7c3aed; /* violet-600 */
+  --tag-database: #047857; /* emerald-700 */
+  --tag-infra: #c2410c; /* orange-700 */
+  --tag-tool: #64748b; /* slate-500 */
+  --tag-concept: #be185d; /* pink-700 */
 }
 
 /* Dark mode override (data-theme attribute on <html>) */
 [data-theme='dark'] {
-  --bg: #0a0a0a;
-  --surface: #161616;
-  --border: #2a2a2a;
-  --text-primary: #e6e6e6;
-  --text-secondary: #888888;
-  --text-muted: #666666;
-  --accent: #4ade80;
-  --accent-hover-bg: #0e1a10;
+  --bg: #0a192f;
+  --surface: #112240;
+  --border: #1e3a5f;
+  --text-primary: #ccd6f6;
+  --text-secondary: #8892b0;
+  --text-muted: #525e80;
+  --accent: #64ffda;
+  --accent-hover-bg: rgba(100, 255, 218, 0.08);
+
+  /* Tech 카테고리 색상 (다크) — 네이비 위에 떠 보이는 채도 */
+  --tag-language: #7dd3fc; /* sky-300 */
+  --tag-framework: #c4b5fd; /* violet-300 */
+  --tag-database: #6ee7b7; /* emerald-300 */
+  --tag-infra: #fdba74; /* orange-300 */
+  --tag-tool: #94a3b8; /* slate-400 */
+  --tag-concept: #f9a8d4; /* pink-300 */
 }
 
-/* Map CSS variables to Tailwind theme tokens.
-   `inline` keeps var() references so dark/light switch works at runtime. */
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -35,40 +49,79 @@
   --color-text-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-hover-bg: var(--accent-hover-bg);
+
+  --color-tag-language: var(--tag-language);
+  --color-tag-framework: var(--tag-framework);
+  --color-tag-database: var(--tag-database);
+  --color-tag-infra: var(--tag-infra);
+  --color-tag-tool: var(--tag-tool);
+  --color-tag-concept: var(--tag-concept);
 }
 
-/* Static design tokens — fonts and animation */
 @theme {
-  --font-pixel: 'Press Start 2P', monospace;
-  --font-terminal: VT323, Menlo, monospace;
   --font-mono: 'JetBrains Mono', Menlo, monospace;
-  --font-sans: Pretendard, system-ui, sans-serif;
+  --font-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
 
-  --animate-blink: blink 1s steps(2) infinite;
-}
+  /* Semantic radius — 시안 변경 시 한 줄 수정 */
+  --radius-card: 6px;
+  --radius-button: 4px;
+  --radius-tag: 9999px;
 
-@keyframes blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
+  /* Semantic shadow */
+  --shadow-card: none;
+  --shadow-card-hover: 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  --default-transition-duration: 200ms;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
   html,
   body {
     margin: 0;
   }
   body {
     background: var(--bg);
-    color: var(--text-primary);
+    color: var(--text-secondary);
     font-family: var(--font-sans);
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Print styles — 인쇄 시 라이트 모드 강제 + 사이드 패널/스포트라이트 숨김 */
+@media print {
+  :root,
+  [data-theme='dark'] {
+    --bg: #ffffff !important;
+    --surface: #ffffff !important;
+    --border: #e5e7eb !important;
+    --text-primary: #0a192f !important;
+    --text-secondary: #1f2937 !important;
+    --text-muted: #4b5563 !important;
+    --accent: #0d9488 !important;
+    --accent-hover-bg: transparent !important;
+  }
+  /* 외부 링크는 URL 자동 표시 */
+  a[href^='http']:after,
+  a[href^='mailto']:after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    color: #4b5563;
+    word-break: break-all;
+  }
+  /* 내부 앵커 / 라우트 링크는 URL 표시 안 함 */
+  a[href^='#']:after,
+  a[href^='/']:after {
+    content: '' !important;
   }
 }
