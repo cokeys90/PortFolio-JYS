@@ -8,17 +8,6 @@ function formatPeriod(start: string, end: string | null): string {
   return `${fmt(start)} — ${end ? fmt(end) : 'Present'}`
 }
 
-function ArrowIcon() {
-  return (
-    <span
-      aria-hidden="true"
-      className="ml-1 inline-block translate-y-px transition-transform group-hover/card:-translate-y-1 group-hover/card:translate-x-1 motion-reduce:transition-none"
-    >
-      →
-    </span>
-  )
-}
-
 function ExperienceCard({ company }: { company: Company }) {
   return (
     <li className="mb-12 group/card relative transition-all motion-reduce:transition-none lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
@@ -32,9 +21,8 @@ function ExperienceCard({ company }: { company: Company }) {
           <div className="text-xs text-text-muted">{company.duration}</div>
         </div>
         <div>
-          <h3 className="font-medium leading-snug text-text-primary group-hover/card:text-accent motion-reduce:transition-none transition-colors">
+          <h3 className="font-medium leading-snug text-text-primary">
             {company.role} · {company.fullName}
-            <ArrowIcon />
           </h3>
           <p className="mt-2 text-sm leading-normal text-text-secondary">{company.summary}</p>
           {company.note && <p className="mt-1 text-xs italic text-text-muted">{company.note}</p>}

@@ -2,31 +2,16 @@ import { sortedProjects, type Project } from '../../data/projects'
 import { Tag } from '../primitives/Tag'
 import { getTechCategory } from '../../data/tech'
 import { SectionTitle } from '../primitives/SectionTitle'
+import { FeaturedProjects } from './FeaturedProjects'
+import { ExternalLinkIcon } from '../primitives/ExternalLinkIcon'
 
 function formatPeriod(start: string, end: string | null): string {
   const fmt = (s: string) => s.replace('-', '.')
   return `${fmt(start)} — ${end ? fmt(end) : 'Present'}`
 }
 
-function ArrowIcon() {
-  return (
-    <span
-      aria-hidden="true"
-      className="ml-1 inline-block translate-y-px transition-transform group-hover/card:-translate-y-1 group-hover/card:translate-x-1 motion-reduce:transition-none"
-    >
-      →
-    </span>
-  )
-}
-
 function ProjectCard({ project }: { project: Project }) {
   const primaryLink = project.links?.[0]
-  const titleNode = (
-    <>
-      <span>{project.name}</span>
-      <ArrowIcon />
-    </>
-  )
 
   return (
     <li className="mb-12 group/card relative transition-all motion-reduce:transition-none lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
@@ -48,10 +33,11 @@ function ProjectCard({ project }: { project: Project }) {
                 rel="noreferrer"
                 className="inline-flex items-baseline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
               >
-                {titleNode}
+                <span>{project.name}</span>
+                <ExternalLinkIcon />
               </a>
             ) : (
-              <span className="inline-flex items-baseline">{titleNode}</span>
+              <span className="inline-flex items-baseline">{project.name}</span>
             )}
           </h3>
 
@@ -118,6 +104,11 @@ export function ProjectsList() {
     >
       <SectionTitle id="projects-heading">Projects</SectionTitle>
 
+      <FeaturedProjects />
+
+      <p className="mb-4 font-mono text-xs uppercase tracking-wider text-text-muted">
+        전체 프로젝트
+      </p>
       <ol className="group/list" aria-label="All projects, newest first">
         {sortedProjects.map((p) => (
           <ProjectCard key={p.id} project={p} />

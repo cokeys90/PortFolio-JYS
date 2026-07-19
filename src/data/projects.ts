@@ -25,6 +25,10 @@ export interface Project {
   achievements: string[]
   links?: ProjectLink[]
   status: ProjectStatus
+  /** 대표작 하이라이트 노출 여부 */
+  featured?: boolean
+  /** 대표작 카드에 강조할 한 줄 성과 지표 */
+  metric?: string
 }
 
 export const projects: Project[] = [
@@ -39,7 +43,7 @@ export const projects: Project[] = [
     teamSize: '2인',
     startedAt: '2025-06',
     endedAt: '2026-03',
-    duration: '약 9개월',
+    duration: '약 10개월',
     tech: ['React Native', 'TypeScript'],
     description:
       'DTC 유전자 검사 기반 탈모 종합 관리 플랫폼 앱 개발. 유전자 검사 결과 조회, 맞춤형 탈모 관리 솔루션 제공.',
@@ -64,6 +68,8 @@ export const projects: Project[] = [
       '스마트폰으로 차량 잠금해제·시동제어·상태확인을 수행하는 앱. Java/API 버전 업그레이드, Kotlin 마이그레이션, BLE 통신 JNI/C++ 인터페이스 수정, 구글 정책 대응.',
     achievements: ['국내 5만대 누적 판매', '12개국 20여개 제조사/딜러사 검증 완료'],
     status: 'live',
+    featured: true,
+    metric: '5만대 판매 · 12개국',
   },
   {
     id: 'achakey-web',
@@ -279,6 +285,8 @@ export const projects: Project[] = [
       '가입자 1,100만명 이상 사용 중',
     ],
     status: 'live',
+    featured: true,
+    metric: '1,100만+ 가입자',
   },
   {
     id: 'git-kia',
@@ -422,6 +430,8 @@ export const projects: Project[] = [
     tech: ['Android', 'Java', 'IoT', 'BLE'],
     description: 'IoT 의료용 압력 분산 방석 연동 앱. 자세 분석 영상/그래프, 알림 서비스 구현.',
     achievements: ['킥스타터 펀딩 목표 $10,000 대비 $45,950 달성 (459%)'],
+    featured: true,
+    metric: '킥스타터 459% 펀딩',
     links: [
       {
         label: 'Kickstarter',
@@ -450,6 +460,8 @@ export const projects: Project[] = [
       'DAU 26만명, 하루 2,300% 증가',
       '2017년 1월 신규 설치 약 109만 다운로드',
     ],
+    featured: true,
+    metric: 'DAU 26만 · 4일 개발',
     links: [
       { label: 'etnews', url: 'https://www.etnews.com/20170208000519' },
       { label: '동아 비즈', url: 'https://bizn.donga.com/3/all/20170208/82767960/2' },
@@ -466,3 +478,12 @@ export const sortedProjects = [...projects].sort((a, b) => {
   const cmp = b.startedAt.localeCompare(a.startedAt)
   return cmp !== 0 ? cmp : a.name.localeCompare(b.name)
 })
+
+/**
+ * 대표작 하이라이트 — 임팩트 순서로 고정 노출 (연대순 아님).
+ * Projects 섹션 상단에 성과 지표와 함께 부각.
+ */
+const FEATURED_ORDER = ['pass-license', 'pocketmapgo', 'achakey-android', 'seat-ai']
+export const featuredProjects = FEATURED_ORDER.map((id) =>
+  projects.find((p) => p.id === id),
+).filter((p): p is Project => Boolean(p))
