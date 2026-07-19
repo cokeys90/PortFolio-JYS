@@ -67,6 +67,7 @@ export const projects: Project[] = [
     description:
       '스마트폰으로 차량 잠금해제·시동제어·상태확인을 수행하는 앱. Java/API 버전 업그레이드, Kotlin 마이그레이션, BLE 통신 JNI/C++ 인터페이스 수정, 구글 정책 대응.',
     achievements: ['국내 5만대 누적 판매', '12개국 20여개 제조사/딜러사 검증 완료'],
+    links: [{ label: '서비스 사이트', url: 'https://www.achakey.net/' }],
     status: 'live',
     featured: true,
     metric: '5만대 판매 · 12개국',
@@ -141,6 +142,7 @@ export const projects: Project[] = [
     description:
       'NFT 민팅 웹사이트 제작. 5회의 화이트리스트/공개판매 성공. NFT 홀더 전용 채팅 서비스 제공.',
     achievements: ['이더리움 1만개 NFT 컬렉션', 'OpenSea 거래 가능'],
+    links: [{ label: '민팅 사이트', url: 'https://canvasn.io/milkomeda_n/' }],
     status: 'archived',
   },
   {
@@ -225,6 +227,7 @@ export const projects: Project[] = [
     tech: ['iOS', 'Swift', 'Jira', 'GitLab'],
     description: '블록체인 기반 기프티콘 구매 및 가상자산 입출금을 지원하는 앱.',
     achievements: [],
+    links: [{ label: 'Facebook', url: 'https://www.facebook.com/FNBPAY/' }],
     status: 'archived',
   },
   {
