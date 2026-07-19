@@ -155,8 +155,10 @@ docs/reference/
 # Claude Code — local user overrides (skills/ stays tracked for team sharing)
 .claude/settings.local.json
 
-# Unrelated MCP tool artifact (poe2-optimizer) — not part of this project
-data/poe2_optimizer.db
+# Unrelated MCP tool artifacts (poe2-optimizer) — not part of this project
+# 루트 앵커(/)로 프로젝트의 src/data 등과 충돌 방지
+/data/
+/cache/
 
 # OS files
 Thumbs.db
