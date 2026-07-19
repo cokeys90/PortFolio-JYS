@@ -269,7 +269,7 @@ service cloud.firestore {
 1. PASS 모바일 운전면허증 (1,100만+ 가입자)
 2. 아차키 디지털 차키 (BLE/JNI/C++)
 3. 포켓맵고 (DAU 26만, 109만 다운로드)
-4. 코러스N (NFT 마켓플레이스 + 특허)
+4. 코러스N (음원 NFT 마켓플레이스)
 5. seat.AI (Kickstarter 459%)
 6. 모코드 (현재 진행 중인 RN 헬스케어)
 
@@ -546,7 +546,7 @@ export default function Hero() {
     { label: 'PASS 모바일 운전면허증', value: '1,100만+ 가입자' },
     { label: '포켓맵고', value: 'DAU 26만 · Play Store 1위' },
     { label: 'seat.AI', value: 'Kickstarter 459% 펀딩' },
-    { label: '코러스N', value: '음원 NFT 특허 출원' },
+    { label: '코러스N', value: '음원 NFT 마켓플레이스' },
   ]
 
   return (

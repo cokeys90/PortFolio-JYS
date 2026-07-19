@@ -17,7 +17,7 @@ export const bioSections: BioSection[] = [
   },
   {
     title: 'Android 하드웨어 및 센서 연계 개발',
-    body: 'Android SDK를 사용하여 디바이스에서 제공되는 하드웨어 기반 기술들을 많이 접목해보았습니다. 문화재청과 연계하여 선정기업으로 선정되어, 실물 문화재 구축에 어려움이 있는 부분들은 유니티로 구현했으며 자이로스코프 센서를 사용하여 물체를 나타내었습니다. 자사 제품인 ZAZ(방석)과 연동 후 방석에서 읽은 데이터와 현재 사용자의 기압을 측정하여 방석의 기압을 보정하기도 하고, 카메라와 ML을 접목하여 OCR 촬영 및 Barcode, QR reader 등 이외에도 많은 경험이 있습니다.',
+    body: 'Android SDK를 사용하여 디바이스에서 제공되는 하드웨어 기반 기술들을 많이 접목해보았습니다. 문화재청 선정기업 프로젝트에서는 실물 복원이 어려운 문화재를 모바일 VR로 되살리는 방식을 유니티와 자이로스코프 센서 기반으로 직접 기획·검토했습니다. 자사 제품인 ZAZ(방석)에 내장된 공기압 센서 데이터를 BLE로 앱과 연동해 자세와 압력 분포를 실시간 그래프로 시각화했고, 카메라와 ML을 접목하여 OCR 촬영 및 Barcode, QR reader 등 이외에도 많은 경험이 있습니다.',
   },
   {
     title: 'Android JNI · C++',
@@ -44,12 +44,12 @@ export const bioSections: BioSection[] = [
   {
     title: '백엔드',
     duration: '약 3년',
-    body: 'DB 선정 및 기획이 어느 정도 정리되었을 때 DB 테이블 설계를 시작으로 API 개발까지 진행했었습니다. 22년도까지는 Java 기반의 Spring Boot 프레임워크를 사용하여 개발하였다가, Git Action을 통해 배포 자동화 구축을 하면서 Golang으로 구현했을 때의 배포 속도나 단순 성능 부분에서 장점이 많다고 판단되어, 이후에는 Golang으로 API 개발을 같이 진행했습니다.',
+    body: 'DB 선정 및 기획이 어느 정도 정리되었을 때 DB 테이블 설계를 시작으로 API 개발까지 진행했었습니다. 22년도까지는 Java 기반의 Spring Boot 프레임워크를 사용하여 개발하였다가, GitHub Actions를 통해 배포 자동화 구축을 하면서 Golang으로 구현했을 때의 배포 속도나 단순 성능 부분에서 장점이 많다고 판단되어, 이후에는 Golang으로 API 개발을 같이 진행했습니다.',
   },
   {
     title: '블록체인 / Web3',
     duration: '약 2년',
-    body: '아라빛에서 NFT 마켓플레이스(CanvasN, 코러스N) 및 민팅 사이트(MilkomedaN) 개발에 참여했습니다. Solidity로 Smart Contract를 작성하고 ERC721, ERC1155, ERC2981 표준을 활용하여 NFT 발행 및 로열티 분배 시스템을 구현했으며, 거래수수료 분배 관련 특허 출원에 기여했습니다. Ethereum, Klaytn, Polygon 등 멀티체인 환경에서의 개발 경험이 있습니다.',
+    body: '아라빛에서 NFT 마켓플레이스(CanvasN, 코러스N) 및 민팅 사이트(MilkomedaN) 개발에 참여했습니다. Solidity로 Smart Contract를 작성하고 ERC721, ERC1155, ERC2981 표준을 활용하여 NFT 발행 및 로열티 분배 시스템을 구현했습니다. 블록체인 프로젝트를 진행하며 관련 기술로 특허 출원을 시도해보기도 했습니다. Ethereum, Klaytn, Polygon 등 멀티체인 환경에서의 개발 경험이 있습니다.',
   },
 ]
 

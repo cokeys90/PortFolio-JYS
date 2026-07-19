@@ -25,7 +25,7 @@ export const experience: Company[] = [
     startedAt: '2025-06',
     endedAt: '2026-03',
     yearsOfService: '1년차',
-    duration: '9개월',
+    duration: '10개월',
     summary:
       '국내 DTC 유전자 검사 기반 탈모 종합 관리 플랫폼 모코드(MOCODE)의 모바일 앱을 React Native로 개발 및 운영. 네이티브 브릿지 통신, 유전자 검사 결과 시각화, 맞춤형 관리 플로우 구현.',
     location: '서울',
@@ -40,7 +40,7 @@ export const experience: Company[] = [
     startedAt: '2024-01',
     endedAt: '2025-02',
     yearsOfService: '2년차',
-    duration: '1년 1개월',
+    duration: '1년 2개월',
     summary:
       '디지털 차키 앱 "아차키" Android 단독 유지보수/고도화. Java→Kotlin 마이그레이션, BLE 통신을 위한 JNI/C++ 인터페이스 수정, 구글 정책 대응. B2B 및 플랫폼 관리 웹(React)도 함께 담당.',
     location: '경기',
@@ -54,7 +54,7 @@ export const experience: Company[] = [
     department: '개발팀',
     role: '책임연구원 · 팀장',
     startedAt: '2015-08',
-    endedAt: '2023-11',
+    endedAt: '2023-10',
     yearsOfService: '8년차',
     duration: '8년 3개월',
     summary:
