@@ -34,12 +34,16 @@
 
 ## 디자인 원칙
 
-- 다크 터미널 + 픽셀 액센트 컨셉, 다크 기본 + 라이트 토글
-- 픽셀 폰트(Press Start 2P)는 헤더/임팩트 수치에만, 본문은 Pretendard
-- 액센트 그린은 다크/라이트가 다름 (가독성/WCAG AA) — 한 색 그대로 쓰지 말 것
+- **Brittany Chiang 스타일 네이비/틸 미니멀** — 분할 레이아웃(좌측 sticky 패널 + 우측 스크롤), 다크 기본 + 라이트 토글
+- 컬러는 CSS 변수 토큰만 사용(`src/index.css`), 하드코딩 금지:
+  - 라이트 bg `#fafaf7` / accent `#0d9488`(틸) / text `#0a192f`
+  - 다크 bg `#0a192f`(네이비) / accent `#64ffda`(시안) / text `#ccd6f6`
+  - accent는 모드별로 다름 (WCAG AA) — 같은 hex 그대로 쓰지 말 것
+- 폰트: 한글 본문 Pretendard(`font-sans`), 영문 라벨·임팩트 수치·코드 JetBrains Mono(`font-mono`). 임팩트 수치는 mono + accent로 강조
+- 그라디언트·글로우·드롭섀도우 지양, 1px 보더 카드(호버 시 accent 보더)
 - `prefers-reduced-motion` 대응 필수
 
-> **디자인 스킬 우선순위**: UI 작업 시 `portfolio-design-system` 스킬이 항상 우선이다. `frontend-design` 같은 일반 디자인 스킬과 충돌하면(예: "그라디언트로 대담하게") **이 프로젝트의 미니멀 터미널 컨셉이 이긴다.**
+> **디자인 스킬 우선순위**: UI 작업 시 `portfolio-design-system` 스킬이 항상 우선이다. `frontend-design` 같은 일반 디자인 스킬과 충돌하면(예: "그라디언트로 대담하게") **이 프로젝트의 네이비/틸 미니멀 컨셉이 이긴다.**
 
 ## 개인정보 처리 (필수 규칙)
 
