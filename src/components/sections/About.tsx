@@ -32,9 +32,25 @@ export function About() {
           (Ethereum/Klaytn/Polygon) 환경도 다뤘습니다.
         </p>
         <p>
+          완벽을 밀어붙이기보다 <Em>서비스에 맞는 판단</Em>을 합니다. 5만 대가 운영 중이던 아차키의
+          Java→Kotlin 마이그레이션에서는 100% 전환 대신 안정성을 위해 <Em>60% 선에서 무중단</Em>으로
+          멈췄습니다. 이런 결정을 내리는 것도 개발자의 실력이라고 생각합니다.
+        </p>
+        <p>
           단순 기능 구현보다 <Em>유지보수성·확장성</Em>을 고려한 설계를 지향합니다. 한 줄의 코드가
           1,100만명에게 닿는 책임을 알기에, 코드 품질과 라이브러리 선별에 욕심이 큽니다.
         </p>
+
+        <div className="mt-6 border-l-2 border-accent pl-4">
+          <p className="font-mono text-xs uppercase tracking-wider text-text-muted">
+            AI in practice
+          </p>
+          <p className="mt-2">
+            <Em>AI를 실무에 녹이고 팀에 확산</Em>합니다. <Em>Claude Code</Em>를
+            분석·설계·구현·테스트 전 주기에 활용하고, 한스파마 개발팀에 도입을 주도했습니다. 나아가
+            전 직원 대상으로 ChatGPT·Gemini·NotebookLM·AI Studio 활용 교육을 직접 진행했습니다.
+          </p>
+        </div>
       </div>
     </section>
   )
