@@ -5,13 +5,13 @@
 
 ## Spark 일일 한도 (절대 넘지 않아야 할 선)
 
-| 서비스           | 한도        | 비고                                            |
-| ---------------- | ----------- | ----------------------------------------------- |
-| Firestore read   | 50,000 / 일 | 어드민 외엔 posts read만 — 가장 위험            |
-| Firestore write  | 20,000 / 일 | visits + contacts create — **봇 폭격 1차 표적** |
-| Firestore delete | 20,000 / 일 | 코드상 사용 안 함                               |
-| Firestore 저장   | 1 GiB       | 텍스트 데이터만이라 여유                        |
-| Hosting egress   | 360 MB / 일 | 정적 자산 캐시 잘 걸면 여유                     |
+| 서비스           | 한도        | 비고                                 |
+| ---------------- | ----------- | ------------------------------------ |
+| Firestore read   | 50,000 / 일 | 어드민 외엔 posts read만 — 가장 위험 |
+| Firestore write  | 20,000 / 일 | visits create — **봇 폭격 1차 표적** |
+| Firestore delete | 20,000 / 일 | 코드상 사용 안 함                    |
+| Firestore 저장   | 1 GiB       | 텍스트 데이터만이라 여유             |
+| Hosting egress   | 360 MB / 일 | 정적 자산 캐시 잘 걸면 여유          |
 
 ## 4계층 방어 (모든 클라이언트 Firestore write 경로에 필수)
 
@@ -30,7 +30,7 @@
 - `keys().hasAll([...])` — 필수 필드 누락 거부
 - 문자열은 `.size() < N` — 거대한 페이로드 차단
 - enum 값은 `in [...]`
-- **예시**: `firestore.rules` 의 `visits/`, `contacts/` 참고
+- **예시**: `firestore.rules` 의 `visits/` 참고
 
 ### 3. Server timestamp 강제
 
@@ -50,7 +50,6 @@
 
 - `visits`: `read: isAdmin()`, `update/delete: false`
 - `posts`: `read: published == true || isAdmin()`, `write: isAdmin() && appCheck`
-- `contacts`: `create: appCheck + 검증`, `read/update: isAdmin()`, `delete: false`
 - `admins`: `read: 본인만`, `write: false` (콘솔에서 수동 등록)
 
 ### 프로젝트 단위
@@ -70,7 +69,6 @@
 
 ### 외부 서비스 (자체 한도 보유)
 
-- **Web3Forms**: 무료 250건/월. 이걸 넘으면 폼 비활성화 — 자체 봇 차단도 운영
 - **Firebase Analytics**: 무료 무제한. 보너스 데이터 소스
 - **(선택) ipapi.co**: 클라이언트에서 호출 시 IP는 서드파티에 노출되나 우리 DB엔 저장 안 함
 
@@ -88,7 +86,6 @@
 1. Firebase 콘솔 > Usage and billing > Firestore 사용량 확인
 2. 규칙 임시 차단:
    - visits: allow create: if false  (분석은 Firebase Analytics로)
-   - contacts: allow create: if false  (Web3Forms 직접 사용 안내)
 3. App Check 정책 강화 (반복 IP 차단)
 4. 원인 분석 후 장기 방어 추가
 ```

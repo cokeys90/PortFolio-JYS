@@ -16,7 +16,6 @@
 
 - **프론트**: React 19 + Vite + TypeScript + Tailwind CSS
 - **백엔드**: Firebase (Hosting, Auth, Firestore, Functions, Storage)
-- **이메일**: Resend
 - **차트/지도**: Recharts, react-simple-maps
 - **마크다운**: react-markdown + remark-gfm + rehype-highlight
 
@@ -42,11 +41,11 @@
 
 ### scope 예시
 
-`hero`, `blog`, `admin`, `auth`, `visit-log`, `contact`, `theme`, `firestore-rules`, `functions`, `deps`
+`hero`, `blog`, `admin`, `auth`, `visit-log`, `theme`, `firestore-rules`, `functions`, `deps`
 
 ### 시크릿 파일 (절대 커밋 금지)
 
-`.env*`, Firebase 서비스 계정 키 (`*-firebase-adminsdk-*.json` 등), Resend API 키.
+`.env*`, Firebase 서비스 계정 키 (`*-firebase-adminsdk-*.json` 등).
 
 ### 브랜치
 

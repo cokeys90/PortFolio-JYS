@@ -33,9 +33,9 @@
 
 ### 핵심 기능
 
-- 공개 포트폴리오 사이트 (Hero / About / Skills / Experience / Projects / Patents / Contact)
+- 공개 포트폴리오 사이트 (Hero / About / Skills / Experience / Projects / Patents)
 - 블로그 (마크다운 기반)
-- 관리자 페이지 (방문자 지역/시간 분석, 블로그 CRUD, 문의 내역)
+- 관리자 페이지 (방문자 지역/시간 분석, 블로그 CRUD)
 
 ### 스코프 외
 
@@ -56,13 +56,11 @@
 | **차트**       | Recharts                                       | 관리자 시계열                           |
 | **지도**       | react-simple-maps + d3-geo                     | 관리자 방문자 지도                      |
 | **마크다운**   | react-markdown + remark-gfm + rehype-highlight | 블로그 렌더링                           |
-| **폼**         | react-hook-form + zod                          | 문의 폼                                 |
 | **서버 상태**  | @tanstack/react-query                          | Firestore 캐시/동기화 (선택)            |
 | **호스팅**     | Firebase Hosting                               | CDN, HTTPS, 커스텀 도메인               |
 | **인증**       | Firebase Auth (Google)                         | 관리자 로그인                           |
 | **DB**         | Firestore                                      | NoSQL, 실시간 동기화                    |
-| **함수**       | Cloud Functions (Node 20)                      | logVisit, 문의 이메일 발송              |
-| **이메일**     | Resend                                         | 무료 한도 넉넉 (월 3,000건)             |
+| **함수**       | Cloud Functions (Node 20)                      | logVisit                                |
 
 ---
 
@@ -143,30 +141,29 @@
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                   Public Site (React SPA)                   │
-│  / · /projects/:slug · /blog · /blog/:slug · /contact       │
+│  / · /projects/:slug · /blog · /blog/:slug                  │
 └──────────────────────────┬──────────────────────────────────┘
                            │
-            ┌──────────────┼──────────────┐
-            │              │              │
-            ▼              ▼              ▼
-   ┌─────────────┐ ┌──────────────┐ ┌──────────────┐
-   │  logVisit   │ │  Firestore   │ │ submitContact│
-   │  Function   │ │   (read)     │ │   Function   │
-   └──────┬──────┘ └──────────────┘ └──────┬───────┘
-          │                                │
-          ▼                                ▼
-   ┌─────────────┐                  ┌──────────────┐
-   │ IP geo API  │                  │   Resend     │
-   │ Firestore   │                  │   (email)    │
-   │  (write)    │                  │   Firestore  │
-   └─────────────┘                  └──────────────┘
+            ┌──────────────┴──────────────┐
+            │                             │
+            ▼                             ▼
+   ┌─────────────┐              ┌──────────────┐
+   │  logVisit   │              │  Firestore   │
+   │  Function   │              │   (read)     │
+   └──────┬──────┘              └──────────────┘
+          │
+          ▼
+   ┌─────────────┐
+   │ IP geo API  │
+   │ Firestore   │
+   │  (write)    │
+   └─────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
 │              Admin Panel (/admin/*)                         │
 │  Firebase Auth (Google) + AdminRoute Guard                  │
 │  · Dashboard (지도, 시계열, 인기 페이지)                     │
 │  · Blog CRUD (마크다운 에디터)                               │
-│  · Contacts 내역                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -204,15 +201,6 @@
   viewCount: number
 }
 
-// contacts/{autoId}
-{
-  name: string
-  email: string
-  message: string
-  status: "new" | "read" | "replied" | "archived"
-  createdAt: Timestamp
-}
-
 // admins/{uid}
 {
   email: string
@@ -245,13 +233,6 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // contacts: 누구나 create, admin만 read/update
-    match /contacts/{id} {
-      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'message', 'status', 'createdAt']);
-      allow read, update: if isAdmin();
-      allow delete: if false;
-    }
-
     // admins: 본인만 read, 직접 write 금지 (콘솔에서 수동 등록)
     match /admins/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;
@@ -272,7 +253,6 @@ service cloud.firestore {
 - `/projects/:slug` — 프로젝트 상세 (스크린샷, 아키텍처, 역할, 트러블슈팅)
 - `/blog` — 블로그 목록
 - `/blog/:slug` — 블로그 상세
-- `/contact` — 문의 폼
 - `*` — 404 (`bash: /random-page: No such file or directory` 컨셉)
 
 ### 관리자 라우트 (AdminRoute 가드)
@@ -282,7 +262,6 @@ service cloud.firestore {
 - `/admin/posts` — 블로그 글 목록
 - `/admin/posts/new` — 새 글 작성
 - `/admin/posts/:slug/edit` — 수정
-- `/admin/contacts` — 문의 내역
 - `/admin/login` — Google 로그인
 
 ### Featured 프로젝트 (대표 6)
@@ -329,7 +308,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 
 ### Week 3 — 블로그 + 마무리
 
-블로그 CRUD, 문의 폼 + 이메일, 디테일 다듬기, 도메인 연결.
+블로그 CRUD, 디테일 다듬기, 도메인 연결.
 
 ---
 
@@ -363,7 +342,7 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 
 #### Day 3: 라우팅 + Hero
 
-- [ ] React Router 설정 (`/`, `/projects`, `/projects/:slug`, `/blog`, `/blog/:slug`, `/contact`, `/admin/*`)
+- [ ] React Router 설정 (`/`, `/projects`, `/projects/:slug`, `/blog`, `/blog/:slug`, `/admin/*`)
 - [ ] Hero 섹션 구현 (부록 코드 참고)
 - [ ] 타이핑 애니메이션 (`react-type-animation` 또는 자체 구현)
 - [ ] 블록 커서 깜빡임 CSS
@@ -431,17 +410,6 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - [ ] published 토글
 - [ ] 첫 글 작성 — "포트폴리오 만들기 회고" 또는 "Firebase 풀스택 적용기"
 
-#### Day 13: 문의 폼
-
-- [ ] `/contact` 페이지
-- [ ] react-hook-form + zod 검증
-- [ ] `submitContact` Cloud Function
-  - [ ] Firestore `contacts`에 저장
-  - [ ] Resend로 본인 이메일에 알림 발송
-- [ ] 스팸 방지 (honeypot 또는 hCaptcha)
-- [ ] Admin 문의 내역 페이지 (`/admin/contacts`)
-- [ ] 상태 변경 (new → read → replied)
-
 #### Day 14: 디테일 다듬기
 
 - [ ] Framer Motion 애니메이션 (Hero 진입, 카드 fade-in)
@@ -470,8 +438,8 @@ Firestore 스키마, Cloud Functions, Auth, Admin 대시보드.
 - ✅ **Firebase 플랜**: **Spark(무료)만 사용. Blaze 업그레이드 금지.**
   - Cloud Functions / Cloud Storage 사용 안 함
   - 방문 로그는 클라이언트 → Firestore 직접 write (IP 수집 X)
-  - 문의 폼은 Web3Forms (이메일) + Firestore 동시 write
   - 이력서/블로그 이미지는 `public/` 정적 호스팅
+- ❌ **문의(Contact) 기능 제외** — 문의 폼/이메일 발송 미구현. 연락은 이메일·SNS 링크로 대체.
 - ✅ **봇/한도 방어**: Firebase App Check (reCAPTCHA v3) + Firestore 규칙 4계층 방어
   - 상세: [`docs/safeguards.md`](./safeguards.md)
 - ✅ **디자인 컨셉**: 다크 터미널 + 픽셀 액센트, 다크/라이트 토글 (다크 기본)
@@ -622,9 +590,6 @@ export default function Hero() {
         <button className="font-terminal text-lg border border-border text-text-secondary px-4 py-1">
           [ ./projects ]
         </button>
-        <button className="font-terminal text-lg border border-border text-text-secondary px-4 py-1">
-          [ ./contact ]
-        </button>
       </div>
     </section>
   )
@@ -737,14 +702,12 @@ portfolio/
 │   │   ├── ProjectDetail.tsx
 │   │   ├── Blog.tsx
 │   │   ├── BlogPost.tsx
-│   │   ├── Contact.tsx
 │   │   ├── NotFound.tsx
 │   │   └── admin/
 │   │       ├── Dashboard.tsx
 │   │       ├── Visits.tsx
 │   │       ├── Posts.tsx
 │   │       ├── PostEditor.tsx
-│   │       ├── Contacts.tsx
 │   │       └── Login.tsx
 │   ├── lib/
 │   │   ├── firebase.ts
@@ -769,7 +732,6 @@ portfolio/
 ├── functions/
 │   ├── src/
 │   │   ├── logVisit.ts
-│   │   ├── submitContact.ts
 │   │   └── index.ts
 │   └── package.json
 ├── firestore.rules
@@ -790,7 +752,6 @@ portfolio/
 - [Pretendard](https://github.com/orioncactus/pretendard)
 - [Press Start 2P (Google Fonts)](https://fonts.google.com/specimen/Press+Start+2P)
 - [VT323 (Google Fonts)](https://fonts.google.com/specimen/VT323)
-- [Resend](https://resend.com/)
 - [Recharts](https://recharts.org/)
 - [react-simple-maps](https://www.react-simple-maps.io/)
 - [개인정보 보호법 (국가법령정보센터)](https://www.law.go.kr/법령/개인정보보호법)

@@ -40,20 +40,6 @@ service cloud.firestore {
       allow write: if isAdmin() && appCheckPassed();
     }
 
-    // contacts: 클라이언트가 create (Web3Forms와 동시 발행). admin만 read/update.
-    match /contacts/{id} {
-      allow create: if appCheckPassed()
-        && request.resource.data.keys().hasOnly(['name', 'email', 'message', 'status', 'createdAt'])
-        && request.resource.data.keys().hasAll(['name', 'email', 'message', 'status', 'createdAt'])
-        && request.resource.data.createdAt == request.time
-        && request.resource.data.name.size() > 0 && request.resource.data.name.size() < 100
-        && request.resource.data.email.size() < 200
-        && request.resource.data.message.size() > 0 && request.resource.data.message.size() < 5000
-        && request.resource.data.status == 'new';
-      allow read, update: if isAdmin();
-      allow delete: if false;
-    }
-
     // admins: 본인만 read, 직접 write 금지 (콘솔에서 수동 등록)
     match /admins/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;
