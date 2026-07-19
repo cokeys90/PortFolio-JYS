@@ -12,9 +12,9 @@ export interface Profile {
 export const profile: Profile = {
   name: 'Coke.YS',
   fullName: '정윤수',
-  title: 'Mobile Developer',
+  title: '1,100만이 쓰는 서비스를 만드는 개발자',
   tagline:
-    '10년차 풀스택 개발자. Android·iOS·React Native·Web·Web3 환경에서 사용자 1,100만이 넘는 서비스부터 사내 R&D 도구까지 다양하게 만들어왔습니다.',
+    '10년차 모바일 개발자. Android(Java/Kotlin) 네이티브를 축으로 iOS·React Native·풀스택 웹·Web3까지, 필요에 따라 영역을 넓혀왔습니다.',
   email: 'cokeys90@gmail.com',
   github: 'https://github.com/cokeys90',
   avatar: '/avatar.jpg',

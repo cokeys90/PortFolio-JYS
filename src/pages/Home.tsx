@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Highlights } from '../components/sections/Highlights'
 import { About } from '../components/sections/About'
 import { Experience } from '../components/sections/Experience'
 import { ProjectsList } from '../components/sections/ProjectsList'
@@ -19,6 +20,7 @@ export function Home() {
 
   return (
     <>
+      <Highlights />
       <About />
       <Experience />
       <ProjectsList />
