@@ -145,6 +145,11 @@ vite.config.ts.timestamp-*
 # Personal reference materials (resumes, ID photos, contact info — never commit)
 docs/reference/
 
+# Job application materials (job postings, interview prep, salary notes — never commit)
+docs/company/
+docs/company_2/
+docs/interview/
+
 # IDE — JetBrains (workspace.xml contains personal editor state)
 .idea/
 *.iml
