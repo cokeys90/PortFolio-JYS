@@ -1,55 +1,69 @@
 @import 'tailwindcss';
 
-/* Light mode (default) */
+/*
+ * Design tokens v2 — "Talking-Hero" 크림 + 네이비 컨셉 (라이트 단일).
+ * 하드코딩 금지: 컴포넌트는 반드시 아래 토큰(Tailwind 유틸)만 사용한다.
+ * --bg 는 히어로 영상 배경색과 정확히 같아야 한다 (docs/redesign-plan.md §7).
+ */
 :root {
-  --bg: #fafaf7;
-  --surface: #ffffff;
-  --border: #e5e5e0;
-  --text-primary: #0a192f;
-  --text-secondary: #4a5568;
-  --text-muted: #6b7280;
-  --accent: #0d9488;
-  --accent-hover-bg: rgba(13, 148, 136, 0.08);
+  --bg: #f4efe6;
+  --surface: #fbf8f2;
+  --surface-2: #efe8db;
+  --ink: #121a2e;
+  --ink-soft: #2b3550;
+  --muted: #6b6a66;
+  --line: #e1dacb;
+  --wordmark: #e8e1d4;
+  --on-ink: #f8f5ee;
 
-  /* Tech 카테고리 색상 (라이트) — 다크 네이비 배경에서도 차분하게 보이는 톤 */
-  --tag-language: #0369a1; /* sky-700 */
-  --tag-framework: #7c3aed; /* violet-600 */
-  --tag-database: #047857; /* emerald-700 */
-  --tag-infra: #c2410c; /* orange-700 */
-  --tag-tool: #64748b; /* slate-500 */
-  --tag-concept: #be185d; /* pink-700 */
-}
+  /* 주기율표 카테고리 톤 (네이비 → 스톤, 명도 단계) */
+  --tone-1: #121a2e;
+  --tone-2: #34405e;
+  --tone-3: #5f6882;
+  --tone-4: #b9b4a8;
+  --tone-5: #d8d2c4;
+  --tone-6: #e9e3d6;
 
-/* Dark mode override (data-theme attribute on <html>) */
-[data-theme='dark'] {
-  --bg: #0a192f;
-  --surface: #112240;
-  --border: #1e3a5f;
-  --text-primary: #ccd6f6;
-  --text-secondary: #8892b0;
-  --text-muted: #525e80;
-  --accent: #64ffda;
-  --accent-hover-bg: rgba(100, 255, 218, 0.08);
-
-  /* Tech 카테고리 색상 (다크) — 네이비 위에 떠 보이는 채도 */
-  --tag-language: #7dd3fc; /* sky-300 */
-  --tag-framework: #c4b5fd; /* violet-300 */
-  --tag-database: #6ee7b7; /* emerald-300 */
-  --tag-infra: #fdba74; /* orange-300 */
-  --tag-tool: #94a3b8; /* slate-400 */
-  --tag-concept: #f9a8d4; /* pink-300 */
+  /* 레거시 토큰 별칭 — 기존 서브 페이지(/about, /blog)가 새 톤으로 보이도록 유지 */
+  --border: var(--line);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-muted: var(--muted);
+  --accent: var(--ink);
+  --accent-hover-bg: rgba(18, 26, 46, 0.06);
+  --tag-language: var(--ink);
+  --tag-framework: var(--ink-soft);
+  --tag-database: var(--ink-soft);
+  --tag-infra: var(--muted);
+  --tag-tool: var(--muted);
+  --tag-concept: var(--ink-soft);
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-wordmark: var(--wordmark);
+  --color-on-ink: var(--on-ink);
+
+  --color-tone-1: var(--tone-1);
+  --color-tone-2: var(--tone-2);
+  --color-tone-3: var(--tone-3);
+  --color-tone-4: var(--tone-4);
+  --color-tone-5: var(--tone-5);
+  --color-tone-6: var(--tone-6);
+
+  /* legacy */
   --color-border: var(--border);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-hover-bg: var(--accent-hover-bg);
-
   --color-tag-language: var(--tag-language);
   --color-tag-framework: var(--tag-framework);
   --color-tag-database: var(--tag-database);
@@ -59,69 +73,103 @@
 }
 
 @theme {
-  --font-mono: 'JetBrains Mono', Menlo, monospace;
   --font-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
 
-  /* Semantic radius — 시안 변경 시 한 줄 수정 */
-  --radius-card: 6px;
-  --radius-button: 4px;
+  --radius-card: 20px;
+  --radius-button: 9999px;
   --radius-tag: 9999px;
+  --radius-tile: 10px;
 
-  /* Semantic shadow */
   --shadow-card: none;
-  --shadow-card-hover: 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-card-hover: none;
 
-  --default-transition-duration: 200ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --default-transition-duration: 250ms;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
   html,
   body {
     margin: 0;
   }
   body {
     background: var(--bg);
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    word-break: keep-all;
+  }
+  ::selection {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
   }
 }
 
-/* Print styles — 인쇄 시 라이트 모드 강제 + 사이드 패널/스포트라이트 숨김 */
-@media print {
-  :root,
-  [data-theme='dark'] {
-    --bg: #ffffff !important;
-    --surface: #ffffff !important;
-    --border: #e5e7eb !important;
-    --text-primary: #0a192f !important;
-    --text-secondary: #1f2937 !important;
-    --text-muted: #4b5563 !important;
-    --accent: #0d9488 !important;
-    --accent-hover-bg: transparent !important;
+/* lenis 권장 스타일 */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* 한글 소형 라벨 — JetBrains Mono 에 한글이 없어 대문자·넓은 자간 라벨 대신 사용 */
+@utility label-ko {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 한글은 세워서 위→아래로, 영문은 90° 눕혀서 (mixed) */
+@utility writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
-  /* 외부 링크는 URL 자동 표시 */
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 13mm;
+  }
+  html,
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .resume a:after {
+    content: none !important;
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+  }
   a[href^='http']:after,
   a[href^='mailto']:after {
     content: ' (' attr(href) ')';
     font-size: 0.85em;
     color: #4b5563;
     word-break: break-all;
-  }
-  /* 내부 앵커 / 라우트 링크는 URL 표시 안 함 */
-  a[href^='#']:after,
-  a[href^='/']:after {
-    content: '' !important;
   }
 }
