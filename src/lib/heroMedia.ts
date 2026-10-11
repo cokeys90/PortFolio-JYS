@@ -27,10 +27,10 @@ export const heroMedia: HeroMedia = {
   intro: { webm: '/videos/hero-intro.webm', mp4: '/videos/hero-intro.mp4' },
   idle: null,
   captions: [
-    { start: 1.2, end: 4.7, text: '안녕하세요, 10년 차 모바일 개발자 정윤수입니다.' },
-    { start: 5.5, end: 8.1, text: '1,100만 명이 쓰는 서비스를 만들었고,' },
-    { start: 8.6, end: 11.7, text: '지금은 LIVIT에서 개발팀을 이끌고 있어요.' },
-    { start: 12.2, end: 13.9, text: '천천히 둘러보세요!' },
+    { start: 1.5, end: 3.6, text: '안녕하세요, 정윤수입니다.' },
+    { start: 4.1, end: 7.6, text: '1,100만 명이 사용하는 서비스를 만든 개발자이고,' },
+    { start: 7.9, end: 11.0, text: '지금은 LIVIT에서 개발팀을 이끌고 있습니다.' },
+    { start: 11.3, end: 14.2, text: '제가 걸어온 길, 천천히 둘러보세요.' },
   ],
   autoplayDelay: 5,
 }

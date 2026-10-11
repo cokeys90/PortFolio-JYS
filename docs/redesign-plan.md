@@ -223,3 +223,10 @@ public/videos/   hero.mp4, hero-poster.webp
   - 깜빡임 제거: 첫 프레임이 실제로 그려진 뒤(requestVideoFrameCallback) 영상 페이드인 → 포스터 페이드아웃. 전환에 opacity + 2px blur
   - 한 형식 재생 실패 시 다른 형식으로 자동 재시도. 화면 밖으로 스크롤하면 멈추고 poster 로 복귀
 - 남은 것: 무음 대기 루프 영상(`heroMedia.idle`) — 지금은 poster 에 CSS 숨쉬기 모션으로 대체
+
+### 13.1 인사 영상 v2 (2026-10-11)
+
+- 원본: Kling 3.0 · 1080p · 15초 · 사운드 생성, 영어 프롬프트 + 한글 대사 → docs/character/kling_intro_v2_source.mp4
+- 대사: "안녕하세요, 정윤수입니다. 천백만 명이 사용하는 서비스를 만든 개발자이고, 지금은 리빗에서 개발팀을 이끌고 있습니다. 제가 걸어온 길, 천천히 둘러보세요."
+- 인코딩: crop=624:1192:56:96 (캐릭터 중앙 기준) → 532×1016, 좌우 40px·하단 36px 알파 페이드. WebM VP9 alpha crf44 (약 2.1MB) / MP4 H.264 crf25 (약 0.5MB)
+- 자막 타이밍은 음성 에너지 구간으로 맞춤 (heroMedia.captions)
