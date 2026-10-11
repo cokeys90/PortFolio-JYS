@@ -100,6 +100,15 @@ export const projects: Project[] = [
       {
         kind: 'store',
         label: 'MO CODE (모코드)',
+        source: 'Google Play',
+        url: 'https://play.google.com/store/apps/details?id=com.hans.mocode',
+        thumb:
+          'https://play-lh.googleusercontent.com/U6vd2h3GGklKhRTy8q9Tqxi-CPErWD6ARCMj35kkWOjcV9WCi4IsDZgB28_-eB1kyF5sBRMx_pcFw12mHWLvHZc=s0-br30',
+        thumbFit: 'contain',
+      },
+      {
+        kind: 'store',
+        label: 'MO CODE (모코드)',
         source: 'App Store',
         url: 'https://apps.apple.com/kr/app/mo-code-%EB%AA%A8%EC%BD%94%EB%93%9C/id6481422871',
         thumb:
