@@ -215,6 +215,6 @@ export function paintStrap(): HTMLCanvasElement {
   ctx.globalAlpha = 0.85
   ctx.font = `600 26px ${MONO}`
   ctx.textBaseline = 'middle'
-  ctx.fillText('COKE.YS  ✦  JEONG YUNSU  ✦', 16, 34)
+  ctx.fillText(`COKE.YS  ✦  ${badgeInfo.nameEn}  ✦`, 16, 34)
   return c
 }

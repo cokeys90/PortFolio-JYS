@@ -26,7 +26,7 @@ export function AboutDetail() {
       <header className="mt-8">
         <SectionLabel index="01">About</SectionLabel>
         <div className="mt-6">
-          <DisplayHeading as="h1" lead="Hi, I'm" accent="Yunsu." />
+          <DisplayHeading as="h1" lead="Hi, I'm" accent="Yoonsoo." />
         </div>
         <p className="mt-8 text-xl font-semibold text-ink">{bioGreeting}</p>
         <p className="mt-4 text-[17px] leading-relaxed text-ink-soft">{bioOpening}</p>

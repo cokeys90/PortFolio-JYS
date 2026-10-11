@@ -14,6 +14,7 @@ const career = highlights.find((h) => h.label === '경력')
 const current = experience.find((c) => c.endedAt === null)
 
 const FACTS: { k: string; v: string }[] = [
+  { k: '이름', v: `${profile.fullName} · ${profile.nameEn} (${profile.nickname})` },
   ...(current ? [{ k: '현재', v: `${current.name} · ${current.role}` }] : []),
   { k: '경력', v: `${career?.value ?? ''} 차 · ${since.replace('-', '.')}부터` },
   { k: '주력', v: 'Android Native (Java · Kotlin)' },
@@ -38,7 +39,7 @@ export function About() {
           <Reveal>
             <SectionLabel index="01">About</SectionLabel>
             <div id="about-title" className="mt-6">
-              <DisplayHeading lead="Hi, I'm" accent="Yunsu." />
+              <DisplayHeading lead="Hi, I'm" accent="Yoonsoo." />
             </div>
           </Reveal>
           <Reveal delay={0.1}>

@@ -35,7 +35,7 @@ export function SiteHeader() {
           </span>
           <span className="hidden text-sm font-medium text-ink sm:inline">
             {profile.fullName}
-            <span className="ml-1.5 font-mono text-[11px] text-muted">Jeong Yunsu</span>
+            <span className="ml-1.5 font-mono text-[11px] text-muted">{profile.nameEn}</span>
           </span>
         </Link>
 

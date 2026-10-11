@@ -34,12 +34,12 @@ export function Hero() {
       <motion.p
         aria-hidden
         style={{ y: wordY }}
-        className="pointer-events-none mt-28 text-center text-[27vw] leading-[0.8] font-black tracking-[-0.06em] text-wordmark select-none lg:absolute lg:inset-x-0 lg:top-[13vh] lg:mt-0 lg:text-[min(23vw,24rem)]"
+        className="pointer-events-none mt-28 text-center text-[19vw] leading-[0.8] font-black tracking-[-0.06em] text-wordmark select-none lg:absolute lg:inset-x-0 lg:top-[13vh] lg:mt-0 lg:text-[min(16.5vw,17rem)]"
         {...(reduce
           ? {}
           : { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 1.6 } })}
       >
-        YUNSU
+        YOONSOO
       </motion.p>
 
       {/* 중앙 캐릭터 */}
@@ -59,7 +59,7 @@ export function Hero() {
               className="font-mono text-[11px] tracking-[0.3em] text-muted uppercase"
               {...enter(0.3)}
             >
-              Jeong Yunsu · {profile.fullName}
+              {profile.nameEn} · {profile.fullName}
             </motion.p>
             <motion.h1
               className="mt-4 text-[clamp(3rem,7.4vw,7rem)] leading-[0.88] font-bold tracking-[-0.045em] text-ink"

@@ -68,7 +68,7 @@ export function Resume() {
             <h1 className="text-[30px] leading-none font-bold tracking-[-0.03em] text-ink">
               {profile.fullName}
               <span className="ml-3 font-mono text-[12px] font-normal tracking-[0.2em] text-muted uppercase">
-                Jeong Yunsu
+                {profile.nameEn}
               </span>
             </h1>
             <p className="mt-3 text-[15px] font-semibold text-ink">
