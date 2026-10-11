@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { profile } from '../../data/profile'
 import { scrollToId } from '../../lib/scroll'
 import { HeroFigure } from './HeroFigure'
+import { HeroAura } from './HeroAura'
 import { ArrowRight, ArrowUpRight } from '../site/Pill'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -48,6 +49,7 @@ export function Hero() {
         className="relative z-10 mx-auto -mt-[16vw] h-[60svh] w-[min(80vw,360px)] lg:absolute lg:bottom-0 lg:left-1/2 lg:mt-0 lg:h-[80%] lg:w-[min(30vw,420px)] lg:-translate-x-1/2"
         {...enter(0.15)}
       >
+        <HeroAura />
         <HeroFigure />
       </motion.div>
 
