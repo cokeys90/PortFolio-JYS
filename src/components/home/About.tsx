@@ -31,7 +31,8 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="relative scroll-mt-0 py-20 md:py-28"
+      // 사원증 캔버스가 위로 넘쳐 히어로(캐릭터 발밑)까지 끈이 보이던 것 방지 — 위아래만 자르고 좌우는 그대로
+      className="relative scroll-mt-0 py-20 [clip-path:inset(0_-100vmax)] md:py-28"
     >
       <div className="mx-auto grid max-w-[1440px] gap-12 px-4 md:px-8 lg:grid-cols-[1.1fr_0.9fr_1fr] lg:gap-8">
         {/* 좌: 인사 */}

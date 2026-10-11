@@ -61,7 +61,7 @@ export function IdBadge() {
         </div>
       )}
       {near && (
-        <div className="absolute -inset-x-4 -top-40 bottom-0 lg:-inset-x-6 lg:-top-56">
+        <div className="absolute -inset-x-4 -top-40 bottom-0 [mask-image:linear-gradient(to_bottom,transparent_0px,black_90px)] lg:-inset-x-6 lg:-top-56 lg:[mask-image:linear-gradient(to_bottom,transparent_110px,black_210px)]">
           <Suspense fallback={null}>
             <LanyardScene active={visible} onReady={onReady} />
           </Suspense>
