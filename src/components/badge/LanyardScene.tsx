@@ -48,6 +48,8 @@ const YAW_D = 4.2 // yaw 감쇠
 const TAP_MS = 240
 /** 끈 정점 간 최소 간격² (이보다 가까우면 버림) */
 const MIN_GAP_SQ = 0.012 * 0.012
+/** 끈 끝을 힌지 아래로 연장하는 길이 (클립 뒤에 가려짐) */
+const TAIL = 0.16
 const TAP_PX = 6
 
 // 3D 재질 색 (테마 토큰과 무관한 금속 클립)
@@ -306,8 +308,13 @@ function Lanyard({ onReady }: { onReady?: () => void }) {
     curve.points[1].copy(pts[2].p)
     curve.points[2].copy(pts[1].p)
     curve.points[3].copy(pts[0].p)
-    // 끈이 접혀 점이 겹치면 MeshLine 의 리본 방향이 프레임마다 뒤집혀 굵기가 깜빡인다 → 너무 가까운 점·NaN 제거
-    const raw = curve.getPoints(32)
+    // 끈 정점은 길이 기준 등간격으로 뽑는다 (getPoints 는 끝부분 간격이 들쭉날쭉 → 끝 모양이 매 프레임 바뀌어 깜빡임)
+    // 그리고 힌지 아래로 같은 방향으로 TAIL 만큼 연장해 끝단(미터 꺾임)을 클립 뒤에 숨긴다
+    const raw = curve.getSpacedPoints(32)
+    if (raw.length >= 2) {
+      tmp.v.subVectors(raw[0], raw[1]).normalize()
+      raw.unshift(raw[0].clone().addScaledVector(tmp.v, TAIL))
+    }
     const pts2: THREE.Vector3[] = []
     for (const v of raw) {
       if (!Number.isFinite(v.x) || !Number.isFinite(v.y) || !Number.isFinite(v.z)) continue
