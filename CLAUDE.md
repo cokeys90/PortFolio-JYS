@@ -29,21 +29,26 @@
 
 - **프론트**: React 19 + Vite + TypeScript + Tailwind CSS
 - **백엔드**: Firebase (Hosting, Auth, Firestore, Functions, Storage)
+- **모션/3D**: motion, lenis, three + @react-three/fiber + meshline
 - **차트/지도**: Recharts, react-simple-maps
 - **마크다운**: react-markdown + remark-gfm + rehype-highlight
 
 ## 디자인 원칙
 
-- **Brittany Chiang 스타일 네이비/틸 미니멀** — 분할 레이아웃(좌측 sticky 패널 + 우측 스크롤), 다크 기본 + 라이트 토글
-- 컬러는 CSS 변수 토큰만 사용(`src/index.css`), 하드코딩 금지:
-  - 라이트 bg `#fafaf7` / accent `#0d9488`(틸) / text `#0a192f`
-  - 다크 bg `#0a192f`(네이비) / accent `#64ffda`(시안) / text `#ccd6f6`
-  - accent는 모드별로 다름 (WCAG AA) — 같은 hex 그대로 쓰지 말 것
-- 폰트: 한글 본문 Pretendard(`font-sans`), 영문 라벨·임팩트 수치·코드 JetBrains Mono(`font-mono`). 임팩트 수치는 mono + accent로 강조
-- 그라디언트·글로우·드롭섀도우 지양, 1px 보더 카드(호버 시 accent 보더)
-- `prefers-reduced-motion` 대응 필수
+> v2 "Talking-Hero" 리뉴얼 (2026-10, `feat/redesign`). 상세: [`docs/redesign-plan.md`](docs/redesign-plan.md)
 
-> **디자인 스킬 우선순위**: UI 작업 시 `portfolio-design-system` 스킬이 항상 우선이다. `frontend-design` 같은 일반 디자인 스킬과 충돌하면(예: "그라디언트로 대담하게") **이 프로젝트의 네이비/틸 미니멀 컨셉이 이긴다.**
+- **크림 + 네이비 라이트 단일 테마** — 전체 폭 싱글 페이지 스크롤, 우상단 알약형 내비 (다크 모드 없음)
+- 컬러는 CSS 변수 토큰만 사용(`src/index.css`), 하드코딩 금지:
+  - bg `#f4efe6`(크림) / surface `#fbf8f2` / ink `#121a2e`(네이비) / muted `#6b6a66` / line `#e1dacb`
+  - 주기율표 톤 `--tone-1~6` (네이비 → 스톤)
+  - `--bg` 는 히어로 영상 배경색과 반드시 일치
+- 폰트: 한글 Pretendard(`font-sans`), 영문 이탤릭 액센트 Instrument Serif(`font-serif italic`), 영문 라벨·숫자·코드 JetBrains Mono(`font-mono`). 한글 라벨은 `label-ko` 유틸 (Mono·Serif 에 한글 글리프 없음 — 한글에 대문자·넓은 자간·이탤릭 금지). 영문 유지: 헤더 메뉴, 섹션 라벨(01 — ABOUT 등, 메뉴명과 동일), 히어로 버튼(Explore work / Let's talk), 큰 헤드라인. 나머지 UI 문구는 한글
+- 헤드라인 패턴: 굵은 산세리프 + 이탤릭 세리프 액센트 (`DisplayHeading`), 섹션 라벨 `01 — ABOUT` (`SectionLabel`)
+- 1px 보더 + 큰 라운드 카드, 그라디언트·글로우·드롭섀도우 지양
+- 모션: `motion`(framer-motion) + `lenis`. `prefers-reduced-motion` 대응 필수 (lenis 비활성, 3D 사원증 → 2D 카드, 가로 스크롤 → 일반 스크롤)
+- 3D 사원증은 three + r3f + 자체 verlet 물리 (rapier 사용 금지 — wasm 840KB gzip, Spark 전송량)
+
+> **디자인 스킬 우선순위**: UI 작업 시 `portfolio-design-system` 스킬이 항상 우선이다. 일반 디자인 스킬과 충돌하면 **이 프로젝트의 크림/네이비 컨셉이 이긴다.**
 
 ## 개인정보 처리 (필수 규칙)
 
