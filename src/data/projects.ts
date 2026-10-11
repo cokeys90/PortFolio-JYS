@@ -640,6 +640,7 @@ export const projects: Project[] = [
     tech: ['Android', 'Java'],
     description: '포켓몬 등장 위치 공유 앱 (지도/게시판 기반). 4일 만에 개발 및 배포.',
     achievements: [
+      '구글플레이 인기 무료 앱 전체 2위',
       '플레이스토어 커뮤니케이션 부문 1위 (카카오톡 제침)',
       'DAU 26만명, 하루 2,300% 증가',
       '2017년 1월 신규 설치 약 109만 다운로드',
