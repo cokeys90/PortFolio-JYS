@@ -89,8 +89,8 @@ export const skillGroups: SkillGroup[] = [
 
 export const strengthKeywords: string[] = [
   '풀스택 개발 지향 (모바일 + 프론트 + 백엔드 + Web3)',
-  'Android Library 패키징/배포 약 5년',
-  '하드웨어/센서 연계 (BLE, IoT, JNI/C++, 카메라+ML/OCR)',
-  '블록체인 Smart Contract 작성 약 2년',
-  '라이브러리/SDK 비교·선별·적용',
+  'Android 라이브러리 패키징·배포 약 5년',
+  '하드웨어·센서 연동 (BLE, IoT, JNI/C++, 카메라 + ML/OCR)',
+  '블록체인 스마트 컨트랙트 개발 약 2년',
+  '라이브러리·SDK 비교·선별·적용',
 ]

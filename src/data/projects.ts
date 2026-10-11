@@ -1,8 +1,22 @@
 export type ProjectStatus = 'live' | 'maintenance' | 'archived'
 
+export type ProjectLinkKind = 'article' | 'store' | 'site' | 'video' | 'social' | 'funding'
+
+/**
+ * 프로젝트 관련 링크 — 원본은 docs/reference/포트폴리오_참고자료 §7 (검증된 것만).
+ * thumb 은 원 사이트의 대표 이미지를 그대로 불러온다. 막히면 kind 기본 카드로 대체.
+ */
 export interface ProjectLink {
   label: string
   url: string
+  kind?: ProjectLinkKind
+  /** 매체·플랫폼 이름 */
+  source?: string
+  /** YYYY.MM */
+  date?: string
+  thumb?: string
+  /** 로고·아이콘처럼 잘리면 안 되는 이미지 */
+  thumbFit?: 'cover' | 'contain'
 }
 
 export interface Project {
@@ -48,7 +62,24 @@ export const projects: Project[] = [
     description:
       'DTC 유전자 검사 기반 탈모 종합 관리 플랫폼 앱 개발. 유전자 검사 결과 조회, 맞춤형 탈모 관리 솔루션 제공.',
     achievements: [],
-    links: [{ label: '서비스 사이트', url: 'https://mocode.co.kr' }],
+    links: [
+      {
+        kind: 'store',
+        label: 'MO CODE (모코드)',
+        source: 'App Store',
+        url: 'https://apps.apple.com/kr/app/mo-code-%EB%AA%A8%EC%BD%94%EB%93%9C/id6481422871',
+        thumb:
+          'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/bc/61/cd/bc61cdde-058d-ea8d-63fb-6f7d541ddc0b/Placeholder.mill/1200x630wa.jpg',
+      },
+      {
+        kind: 'site',
+        label: '모코드 – 탈모 종합 서비스앱',
+        source: 'mocode.co.kr',
+        url: 'https://mocode.co.kr',
+        thumb: 'https://mocode.co.kr/assets/home/images/logo_top.png',
+        thumbFit: 'contain',
+      },
+    ],
     status: 'live',
   },
   {
@@ -67,7 +98,32 @@ export const projects: Project[] = [
     description:
       '스마트폰으로 차량 잠금해제·시동제어·상태확인을 수행하는 앱. Java/API 버전 업그레이드, Kotlin 마이그레이션, BLE 통신 JNI/C++ 인터페이스 수정, 구글 정책 대응.',
     achievements: ['국내 5만대 누적 판매', '12개국 20여개 제조사/딜러사 검증 완료'],
-    links: [{ label: '서비스 사이트', url: 'https://www.achakey.net/' }],
+    links: [
+      {
+        kind: 'store',
+        label: 'Achakey - The Digital Car Key',
+        source: 'Google Play',
+        url: 'https://play.google.com/store/apps/details?id=io.tuneit',
+        thumb:
+          'https://play-lh.googleusercontent.com/STceLE6gZnKC0U8-_cwmZfYo-f05_AXEWfWflc3kSFcKPnPNlYjEmvrmLnJCXL1wBT8WfYaDTTHHVyndggNUzw=s0-br30',
+        thumbFit: 'contain',
+      },
+      {
+        kind: 'article',
+        label: '"오래된 차도 스마트폰으로 열어" [모빌리티 열전]',
+        source: '세계일보',
+        date: '2021.02',
+        url: 'https://www.segye.com/newsView/20210217509089',
+        thumb: 'https://www.segye.com/content/image/2021/02/17/20210217509086.jpg',
+      },
+      {
+        kind: 'site',
+        label: '아차키 서비스 사이트',
+        source: 'achakey.net',
+        url: 'https://www.achakey.net/',
+        thumb: 'https://www.achakey.net/title.png',
+      },
+    ],
     status: 'live',
     featured: true,
     metric: '5만대 판매 · 12개국',
@@ -142,7 +198,21 @@ export const projects: Project[] = [
     description:
       'NFT 민팅 웹사이트 제작. 5회의 화이트리스트/공개판매 성공. NFT 홀더 전용 채팅 서비스 제공.',
     achievements: ['이더리움 1만개 NFT 컬렉션', 'OpenSea 거래 가능'],
-    links: [{ label: '민팅 사이트', url: 'https://canvasn.io/milkomeda_n/' }],
+    links: [
+      {
+        kind: 'social',
+        label: 'Milkomeda N, PET NFT issuance',
+        source: 'Medium · Canvas_N',
+        date: '2023.08',
+        url: 'https://canvasn.medium.com/milkomeda-n-pet-nft-issuance-5c63d7369437',
+      },
+      {
+        kind: 'site',
+        label: 'MilkomedaN 민팅 사이트',
+        source: 'canvasn.io',
+        url: 'https://canvasn.io/milkomeda_n/',
+      },
+    ],
     status: 'archived',
   },
   {
@@ -173,7 +243,16 @@ export const projects: Project[] = [
     description:
       '실물/NFT 그림 거래 플랫폼 개발. 멀티체인(Ethereum, Klaytn, Polygon) NFT 배포 웹사이트 제작. 팀장 역할로 개발팀 관리 병행.',
     achievements: ['2022년 9월 베타 런칭', '압구정 갤러리 오픈'],
-    links: [{ label: '서비스 사이트', url: 'https://canvasn.io' }],
+    links: [
+      {
+        kind: 'social',
+        label: 'Canvas_N 공식 블로그',
+        source: 'Medium',
+        url: 'https://canvasn.medium.com',
+        thumb: 'https://miro.medium.com/v2/resize:fit:2400/1*Hm2HTfvqH4z4dnR__va38w.png',
+      },
+      { kind: 'site', label: 'CanvasN', source: 'canvasn.io', url: 'https://canvasn.io' },
+    ],
     status: 'live',
   },
   {
@@ -227,7 +306,14 @@ export const projects: Project[] = [
     tech: ['iOS', 'Swift', 'Jira', 'GitLab'],
     description: '블록체인 기반 기프티콘 구매 및 가상자산 입출금을 지원하는 앱.',
     achievements: [],
-    links: [{ label: 'Facebook', url: 'https://www.facebook.com/FNBPAY/' }],
+    links: [
+      {
+        kind: 'social',
+        label: 'FNBPay',
+        source: 'Facebook',
+        url: 'https://www.facebook.com/FNBPAY/',
+      },
+    ],
     status: 'archived',
   },
   {
@@ -264,7 +350,14 @@ export const projects: Project[] = [
     tech: ['iOS', 'Swift', 'Bitbucket'],
     description: '종근당 메디뷰 사이트 하이브리드 웹앱 개발. 웹-앱 브릿지 통신 구현.',
     achievements: [],
-    links: [{ label: '서비스 사이트', url: 'https://www.ckdmediview.com' }],
+    links: [
+      {
+        kind: 'site',
+        label: '메디뷰',
+        source: 'ckdmediview.com',
+        url: 'https://www.ckdmediview.com',
+      },
+    ],
     status: 'live',
   },
   {
@@ -286,6 +379,33 @@ export const projects: Project[] = [
     achievements: [
       '2020년 6월 국내 최초 모바일 운전면허 확인 서비스 출시',
       '가입자 1,100만명 이상 사용 중',
+    ],
+    links: [
+      {
+        kind: 'article',
+        label: '이통3사-경찰청, 본인인증 앱 ‘PASS’에 운전면허증 담는다',
+        source: '데일리안',
+        date: '2019.10',
+        url: 'https://www.dailian.co.kr/news/view/830416/',
+        thumb: 'https://cdnimage.dailian.co.kr/news/201910/news_1569975172_830416_m_1.jpg',
+      },
+      {
+        kind: 'article',
+        label: 'PASS 모바일운전면허증, 대통령상 수상…연내 가입자 200만 돌파 전망',
+        source: '이투데이',
+        date: '2020.11',
+        url: 'https://www.etoday.co.kr/news/view/1964311',
+        thumb: 'https://img.etoday.co.kr/pto_db/2020/11/20201119094258_1542227_1200_892.jpg',
+      },
+      {
+        kind: 'article',
+        label: '‘PASS모바일운전면허’ 금융·공공 분야 확산 기대',
+        source: 'SKT 뉴스룸',
+        date: '2023.10',
+        url: 'https://news.sktelecom.com/198878',
+        thumb:
+          'https://news-static.sktelecom.com/wp-content/uploads/2023/10/%ED%86%B5%EC%8B%A0-3%EC%82%AC-%EB%B3%B4%EB%8F%84%EC%9E%90%EB%A3%8C-%EC%82%AC%EC%A7%84-PASS%EB%AA%A8%EB%B0%94%EC%9D%BC%EC%9A%B4%EC%A0%84%EB%A9%B4%ED%97%88-ICT%EA%B7%9C%EC%A0%9C%EC%83%8C%EB%93%9C%EB%B0%95%EC%8A%A4-%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D-%EB%B3%80%EA%B2%BD-%EC%8A%B9%EC%9D%B8...%EA%B8%88%EC%9C%B5-%EA%B3%B5%EA%B3%B5-%EB%B6%84%EC%95%BC-%ED%99%95%EC%82%B0-%EA%B8%B0%EB%8C%80-1_fb.jpg',
+      },
     ],
     status: 'live',
     featured: true,
@@ -397,7 +517,14 @@ export const projects: Project[] = [
     tech: ['JSP', 'JavaScript', 'Java', 'Spring Boot', 'Bitbucket'],
     description: '여행사 대상 SAQ 평가 자동화 및 전산화 서비스 개발.',
     achievements: [],
-    links: [{ label: '서비스 사이트', url: 'https://ssaq.bbsec.co.kr' }],
+    links: [
+      {
+        kind: 'site',
+        label: 'SmartSAQ',
+        source: 'ssaq.bbsec.co.kr',
+        url: 'https://ssaq.bbsec.co.kr',
+      },
+    ],
     status: 'live',
   },
   {
@@ -422,7 +549,7 @@ export const projects: Project[] = [
     id: 'seat-ai',
     slug: 'seat-ai',
     name: 'seat.AI (ZAZ) 공기압 방석',
-    oneLine: 'IoT 의료용 압력 분산 방석 — Kickstarter 459% 펀딩',
+    oneLine: 'IoT 의료용 압력 분산 방석 — Kickstarter 489% 펀딩',
     company: 'arabit',
     role: 'Android 앱 개발, 배포',
     contribution: 'Android 단독',
@@ -432,15 +559,26 @@ export const projects: Project[] = [
     duration: '약 12개월',
     tech: ['Android', 'Java', 'IoT', 'BLE'],
     description: 'IoT 의료용 압력 분산 방석 연동 앱. 자세 분석 영상/그래프, 알림 서비스 구현.',
-    achievements: ['킥스타터 펀딩 목표 $10,000 대비 $45,950 달성 (459%)'],
+    achievements: ['킥스타터 펀딩 목표 $10,000 대비 $48,950 달성 (489%)'],
     featured: true,
-    metric: '킥스타터 459% 펀딩',
+    metric: '킥스타터 489% 펀딩',
     links: [
       {
-        label: 'Kickstarter',
+        kind: 'funding',
+        label: 'seat.AI : Customized sitting cushion just for you',
+        source: 'Kickstarter',
+        date: '2017.08',
         url: 'https://www.kickstarter.com/projects/1400433007/seatai-customized-cushion-just-for-you',
+        thumb:
+          'https://i.kickstarter.com/assets/017/513/549/869e64b048f5bdb70bf152a201d13631_original.png?anim=false&fit=cover&gravity=auto&height=873&origin=ugc&q=92&v=1500910701&width=1552&sig=kxxs0xYkPPG99V5XePF%2BztADroQBEbCesNIeT8YR0Bk%3D',
       },
-      { label: '제품 영상', url: 'https://youtu.be/Ei37Zy38Uuc?t=114' },
+      {
+        kind: 'video',
+        label: 'seat.AI 제품 영상',
+        source: 'YouTube',
+        url: 'https://youtu.be/Ei37Zy38Uuc?t=114',
+        thumb: 'https://img.youtube.com/vi/Ei37Zy38Uuc/hqdefault.jpg',
+      },
     ],
     status: 'archived',
   },
@@ -459,15 +597,34 @@ export const projects: Project[] = [
     tech: ['Android', 'Java'],
     description: '포켓몬 등장 위치 공유 앱 (지도/게시판 기반). 4일 만에 개발 및 배포.',
     achievements: [
-      '플레이스토어 커뮤니티 부문 1위 (카카오톡 제침)',
+      '플레이스토어 커뮤니케이션 부문 1위 (카카오톡 제침)',
       'DAU 26만명, 하루 2,300% 증가',
       '2017년 1월 신규 설치 약 109만 다운로드',
     ],
     featured: true,
     metric: 'DAU 26만 · 4일 개발',
     links: [
-      { label: 'etnews', url: 'https://www.etnews.com/20170208000519' },
-      { label: '동아 비즈', url: 'https://bizn.donga.com/3/all/20170208/82767960/2' },
+      {
+        kind: 'article',
+        label: '‘포켓몬고’ 열풍···카카오톡 넘어선 커뮤니케이션 앱 1위는?',
+        source: '전자신문',
+        date: '2017.02',
+        url: 'https://www.etnews.com/20170208000519',
+        thumb: 'https://img.etnews.com/news/article/2017/02/08/article_08184332911746.jpg',
+      },
+      {
+        kind: 'article',
+        label: '포켓맵고 기사',
+        source: '동아 비즈',
+        date: '2017.02',
+        url: 'https://bizn.donga.com/3/all/20170208/82767960/2',
+      },
+      {
+        kind: 'article',
+        label: '포켓맵고 기사',
+        source: '리더스뉴스',
+        url: 'https://www.readersnews.com/news/articleView.html?idxno=70364',
+      },
     ],
     status: 'archived',
   },

@@ -7,7 +7,7 @@ export interface BioSection {
 
 export const bioGreeting = '안녕하세요, 개발자 정윤수입니다.'
 
-export const bioOpening = `Android는 프로젝트 시작 단계 분석 및 설계와 구현, 마지막으로 배포 및 앱 이관까지 다양하고 많은 경험이 있습니다. 현재는 한스파마에서 React Native 기반 헬스케어 앱을 담당하고 있으며, 직전 회사인 튠잇에서 아차키 앱을 관리하며 최신 정책 및 권장 개발 사항을 파악해왔습니다.`
+export const bioOpening = `Android는 프로젝트 시작 단계 분석 및 설계와 구현, 마지막으로 배포 및 앱 이관까지 다양하고 많은 경험이 있습니다. 현재는 LIVIT에서 개발팀 리드를 맡아 개발과 팀 운영을 함께 하고 있으며, 이전에는 한스파마에서 React Native 기반 헬스케어 앱을, 튠잇에서 아차키 앱을 담당하며 최신 정책 및 권장 개발 사항을 파악해왔습니다.`
 
 export const bioSections: BioSection[] = [
   {
@@ -34,7 +34,7 @@ export const bioSections: BioSection[] = [
   },
   {
     title: 'React Native',
-    body: '현재 한스파마에서 DTC 유전자 검사 기반 헬스케어 앱(모코드)을 React Native로 개발하고 있습니다. 네이티브 개발 경험을 바탕으로 브릿지 통신 및 네이티브 모듈 연동에 강점을 가지고 있습니다.',
+    body: '한스파마에서 DTC 유전자 검사 기반 헬스케어 앱(모코드)을 React Native로 개발했습니다. 네이티브 개발 경험을 바탕으로 브릿지 통신 및 네이티브 모듈 연동에 강점을 가지고 있습니다.',
   },
   {
     title: '프론트엔드',
