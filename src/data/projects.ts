@@ -43,25 +43,59 @@ export interface Project {
   featured?: boolean
   /** 대표작 카드에 강조할 한 줄 성과 지표 */
   metric?: string
+  /** 숫자 성과 대신 도메인을 강조할 때 (대표작 성과 칸에 우선 표시) */
+  highlight?: { value: string; label: string }
 }
 
 export const projects: Project[] = [
+  {
+    id: 'livit-tansolution',
+    slug: 'livit-tansolution',
+    name: '탄솔루션 — ESG 탄소배출 관리 SaaS',
+    oneLine: '기업의 탄소배출 산정·감축·보고 SaaS와 AI 제품 개발팀 리드',
+    company: 'livit',
+    role: '개발팀 리드',
+    contribution: '팀 리딩 · 개발 참여',
+    teamSize: '6인 (본인 포함)',
+    startedAt: '2026-08',
+    endedAt: null,
+    duration: '재직 중',
+    // 제품 기술 스택이 아닌 리드 역할 키워드 (docs/reference 포트폴리오_참고자료 §6 LIVIT)
+    tech: ['팀 리딩', '개발 프로세스', '문서 표준화', 'Jira', 'GitHub', 'Confluence'],
+    description:
+      '기업의 탄소배출 산정·감축·보고를 돕는 탄솔루션(ESG·LCA SaaS)과 AI OCR, AI 챗봇 제품을 맡은 6인 개발팀의 리드. 개발과 팀 운영을 함께 맡고 있습니다.',
+    achievements: [],
+    featured: true,
+    highlight: { value: 'ESG · 탄소', label: '탄솔루션 SaaS · AI OCR · AI 챗봇' },
+    links: [
+      {
+        kind: 'site',
+        label: '쉽고 스마트한 탄소배출관리, 탄솔루션',
+        source: '(주)리빗',
+        url: 'https://www.tanso.life/ko/home',
+        thumb: 'https://tanso.life/opengraph-image.png',
+      },
+    ],
+    status: 'live',
+  },
   {
     id: 'mocode',
     slug: 'mocode',
     name: '모코드 (MOCODE)',
     oneLine: 'DTC 유전자 검사 기반 탈모 종합 관리 플랫폼',
     company: 'hanspharma',
-    role: '모바일 앱 담당',
+    role: '모바일 앱 개발 · 개발 팀장',
     contribution: '모바일 단독 (1/2)',
     teamSize: '2인',
     startedAt: '2025-06',
     endedAt: '2026-03',
     duration: '약 10개월',
-    tech: ['React Native', 'TypeScript'],
+    tech: ['React Native', 'TypeScript', 'Kotlin', 'Swift'],
     description:
-      'DTC 유전자 검사 기반 탈모 종합 관리 플랫폼 앱 개발. 유전자 검사 결과 조회, 맞춤형 탈모 관리 솔루션 제공.',
+      'DTC 유전자 검사 기반 탈모 종합 관리 플랫폼 앱을 React Native로 개발·운영. 유전자 검사 결과 조회와 맞춤형 관리 솔루션, 딥링크·FCM 푸시, 네이티브 모듈 연동(Kotlin·Swift), 스토어 배포까지 담당하고 개발 팀장으로 일정·요건을 관리.',
     achievements: [],
+    featured: true,
+    highlight: { value: 'DTC 유전자 검사', label: '탈모 관리 헬스케어 앱' },
     links: [
       {
         kind: 'store',
@@ -75,7 +109,7 @@ export const projects: Project[] = [
         kind: 'site',
         label: '모코드 – 탈모 종합 서비스앱',
         source: 'mocode.co.kr',
-        url: 'https://mocode.co.kr',
+        url: 'https://mocode.co.kr/home/index.php',
         thumb: 'https://mocode.co.kr/assets/home/images/logo_top.png',
         thumbFit: 'contain',
       },
@@ -643,7 +677,14 @@ export const sortedProjects = [...projects].sort((a, b) => {
  * 대표작 하이라이트 — 임팩트 순서로 고정 노출 (연대순 아님).
  * Projects 섹션 상단에 성과 지표와 함께 부각.
  */
-const FEATURED_ORDER = ['pass-license', 'pocketmapgo', 'achakey-android', 'seat-ai']
+const FEATURED_ORDER = [
+  'pass-license',
+  'livit-tansolution',
+  'mocode',
+  'achakey-android',
+  'pocketmapgo',
+  'seat-ai',
+]
 export const featuredProjects = FEATURED_ORDER.map((id) =>
   projects.find((p) => p.id === id),
 ).filter((p): p is Project => Boolean(p))

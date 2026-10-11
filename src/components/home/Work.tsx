@@ -13,9 +13,20 @@ const EASE = [0.16, 1, 0.3, 1] as const
 const shortName = (p: Project) => p.name.split(' — ')[0].split(' (')[0]
 const companyName = (id: string) => experience.find((c) => c.id === id)?.name ?? id
 const period = (p: Project) =>
-  p.endedAt && p.endedAt !== p.startedAt
-    ? `${p.startedAt.replace('-', '.')} – ${p.endedAt.replace('-', '.')}`
-    : p.startedAt.replace('-', '.')
+  p.endedAt === null
+    ? `${p.startedAt.replace('-', '.')} – 현재`
+    : p.endedAt !== p.startedAt
+      ? `${p.startedAt.replace('-', '.')} – ${p.endedAt.replace('-', '.')}`
+      : p.startedAt.replace('-', '.')
+/** 한글 칩은 Mono 대신 본문 서체 (Mono 에 한글 글리프 없음) */
+const HANGUL = /[가-힣]/
+
+/** 대표작 성과 칸: 도메인 강조(highlight)가 있으면 우선, 없으면 숫자 지표 */
+function cardHighlight(p: Project) {
+  if (p.highlight) return { value: p.highlight.value, rest: p.highlight.label, domain: true }
+  const m = splitMetric(p.metric)
+  return m ? { ...m, domain: false } : null
+}
 
 /** "DAU 26만 · 4일 개발" → { value: '26만', rest: 'DAU · 4일 개발' } — 숫자가 든 첫 토큰을 대표값으로 */
 function splitMetric(metric?: string) {
@@ -32,7 +43,7 @@ function splitMetric(metric?: string) {
 }
 
 function ProjectBody({ p, index }: { p: Project; index: number }) {
-  const m = splitMetric(p.metric)
+  const m = cardHighlight(p)
   return (
     <div className="grid h-full gap-8 p-6 md:p-8 xl:grid-cols-[1.15fr_0.85fr]">
       <div className="flex min-w-0 flex-col">
@@ -61,7 +72,7 @@ function ProjectBody({ p, index }: { p: Project; index: number }) {
           {p.tech.slice(0, 7).map((t) => (
             <li
               key={t}
-              className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-ink-soft"
+              className={`rounded-full border border-line px-2.5 py-1 text-ink-soft ${HANGUL.test(t) ? 'text-[12px]' : 'font-mono text-[11px]'}`}
             >
               {t}
             </li>
@@ -97,7 +108,7 @@ function ProjectBody({ p, index }: { p: Project; index: number }) {
 
       {m && (
         <div className="relative hidden flex-col justify-between overflow-hidden rounded-2xl border border-line bg-bg p-6 xl:flex">
-          <p className="label-ko text-muted">성과</p>
+          <p className="label-ko text-muted">{m.domain ? '도메인' : '성과'}</p>
           <p
             aria-hidden
             className="pointer-events-none absolute -right-4 -bottom-10 text-[11rem] leading-none font-black tracking-tighter text-wordmark select-none"
@@ -105,7 +116,13 @@ function ProjectBody({ p, index }: { p: Project; index: number }) {
             {String(index + 1).padStart(2, '0')}
           </p>
           <div className="relative">
-            <p className="text-[clamp(2.4rem,4vw,3.6rem)] leading-none font-bold tracking-[-0.03em] text-ink tabular-nums">
+            <p
+              className={`font-bold text-ink ${
+                m.domain
+                  ? 'text-[clamp(1.9rem,3vw,2.8rem)] leading-tight tracking-[-0.02em]'
+                  : 'text-[clamp(2.4rem,4vw,3.6rem)] leading-none tracking-[-0.03em] tabular-nums'
+              }`}
+            >
               {m.value}
             </p>
             <p className="mt-2 text-lg font-medium text-ink-soft">{m.rest}</p>
@@ -130,7 +147,7 @@ function Accordion() {
             layout={!reduce}
             transition={{ duration: 0.7, ease: EASE }}
             className={`relative overflow-hidden rounded-card border border-line ${
-              open ? 'flex-1 bg-surface' : 'w-[84px] shrink-0 bg-surface-2 hover:bg-surface'
+              open ? 'flex-1 bg-surface' : 'w-[72px] shrink-0 bg-surface-2 hover:bg-surface'
             }`}
           >
             {open ? (
@@ -180,7 +197,7 @@ function Stack() {
     <ul className="space-y-3 lg:hidden">
       {featuredProjects.map((p, i) => {
         const open = i === active
-        const m = splitMetric(p.metric)
+        const m = cardHighlight(p)
         return (
           <li key={p.id} className="overflow-hidden rounded-card border border-line bg-surface">
             <button
@@ -277,8 +294,8 @@ export function Work() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="max-w-sm text-sm text-muted">
-              {sortedProjects.length}개 프로젝트 중 성과가 가장 컸던 {featuredProjects.length}
-              개입니다. 항목을 눌러 펼쳐 보세요.
+              {sortedProjects.length}개 프로젝트 중 성과가 컸던 작업과 최근 도메인을 담은{' '}
+              {featuredProjects.length}개입니다. 항목을 눌러 펼쳐 보세요.
             </p>
           </Reveal>
         </div>

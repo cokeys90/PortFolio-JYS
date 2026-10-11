@@ -25,9 +25,11 @@ export function ProjectDetail() {
   if (!p) return <NotFound />
 
   const period =
-    p.endedAt && p.endedAt !== p.startedAt
-      ? `${ym(p.startedAt)} – ${ym(p.endedAt)}`
-      : ym(p.startedAt)
+    p.endedAt === null
+      ? `${ym(p.startedAt)} – 현재`
+      : p.endedAt !== p.startedAt
+        ? `${ym(p.startedAt)} – ${ym(p.endedAt)}`
+        : ym(p.startedAt)
   const facts = [
     { k: '회사', v: [companyName(p.company), p.externalCompany].filter(Boolean).join(' · ') },
     { k: '기간', v: p.duration ? `${period} · ${p.duration}` : period },
@@ -67,7 +69,7 @@ export function ProjectDetail() {
         {p.tech.map((t) => (
           <li
             key={t}
-            className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-ink-soft"
+            className={`rounded-full border border-line px-2.5 py-1 text-ink-soft ${/[가-힣]/.test(t) ? 'text-[12px]' : 'font-mono text-[11px]'}`}
           >
             {t}
           </li>

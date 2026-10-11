@@ -137,7 +137,7 @@ export function Resume() {
                   </p>
                   <p className="font-mono text-[11.5px] text-muted">
                     {ym(p.startedAt)}
-                    {p.endedAt && p.endedAt !== p.startedAt ? ` – ${ym(p.endedAt)}` : ''}
+                    {p.endedAt !== p.startedAt ? ` – ${ym(p.endedAt)}` : ''}
                   </p>
                 </div>
                 <p className="mt-1 text-[12.5px] text-muted">
