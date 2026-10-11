@@ -2,27 +2,39 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
+    <meta name="theme-color" content="#f4efe6" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="정윤수 (Coke.YS) — 모바일 개발자 포트폴리오. Android 네이티브를 축으로 1,100만 사용자 서비스를 만든 10년차 개발자." />
+    <meta
+      name="description"
+      content="10년 차 모바일 개발자 정윤수의 포트폴리오. Android 네이티브를 중심으로 1,100만 명이 쓰는 서비스를 만들었고, 지금은 LIVIT에서 개발팀을 이끌고 있습니다."
+    />
+    <link rel="canonical" href="https://portfolio.cokeys90.dev/" />
+
+    <!-- 공유 미리보기 (카카오톡·슬랙·링크드인 등) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="정윤수 포트폴리오" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:url" content="https://portfolio.cokeys90.dev/" />
+    <meta property="og:title" content="정윤수 — Mobile Developer" />
+    <meta
+      property="og:description"
+      content="1,100만 명이 쓰는 서비스를 만든 10년 차 모바일 개발자. Android · iOS · React Native · Web · Web3"
+    />
+    <meta property="og:image" content="https://portfolio.cokeys90.dev/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="정윤수 3D 캐릭터와 Mobile Developer 문구" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="정윤수 — Mobile Developer" />
+    <meta
+      name="twitter:description"
+      content="1,100만 명이 쓰는 서비스를 만든 10년 차 모바일 개발자"
+    />
+    <meta name="twitter:image" content="https://portfolio.cokeys90.dev/og.jpg" />
     <title>정윤수 — Mobile Developer</title>
-    <script>
-      // 깜빡임 방지: 첫 페인트 전 data-theme 설정
-      // 우선순위: localStorage > OS prefers > 'dark'
-      (function () {
-        try {
-          var stored = localStorage.getItem('portfolio-theme')
-          if (stored === 'dark' || stored === 'light') {
-            document.documentElement.dataset.theme = stored
-            return
-          }
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-          document.documentElement.dataset.theme = prefersDark ? 'dark' : 'light'
-        } catch (e) {
-          document.documentElement.dataset.theme = 'dark'
-        }
-      })()
-    </script>
   </head>
   <body>
     <div id="root"></div>
