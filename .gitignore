@@ -147,7 +147,9 @@ docs/reference/
 
 # Job application materials (job postings, interview prep, salary notes — never commit)
 docs/company/
-docs/company_2/
+docs/company2/
+docs/company3/
+docs/company*/
 docs/interview/
 
 # IDE — JetBrains (workspace.xml contains personal editor state)
@@ -173,3 +175,6 @@ Thumbs.db
 firebase-debug.log
 firebase-debug.*.log
 *.local
+
+# 히어로 영상 원본 (Kling 다운로드, 대용량) — 웹용 인코딩본만 public/videos 에 커밋
+docs/character/*.mp4
